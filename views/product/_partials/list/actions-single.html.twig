@@ -1,0 +1,71 @@
+
+{# Begin registry button #}
+{% if items_in_registry is empty %}
+{% set added = false %}
+{% else %}
+{% set added = true %}
+{% endif %}
+{% if registries is empty %}
+<div class="col-md-4 col-xs-6 no-padding-btn-left">
+    <button type="submit" name="action" value="registry" class="btn btn-block btn-default btn-bigger">
+        {% if added %}
+        <i class="fa fa-check"></i>
+        {% else %}
+        <i class="fa fa-gift"></i>
+        {% endif %}
+        <span>Add to Registry</span>
+    </button>
+</div>
+{% else %}
+<div class="col-md-4 col-xs-6 no-padding-btn-left">
+    <button type="submit" name="action" value="registry" class="btn btn-block btn-default btn-bigger" data-toggle="dropdown">
+        {% if added %}
+        <i class="fa fa-check"></i>
+        {% else %}
+        <i class="fa fa-gift"></i>
+        {% endif %}
+        <span>Add to Registry</span>
+    </button>
+    <ul class="dropdown-menu action-drop-registry" style="margin-left:10px;" role="menu">
+        {% for registry in registries %}
+        <li><button type="submit" class="btn btn-block btn-default btn-sm" name="action" value="registry/{{registry.id}}">Add to '{{registry.name}}'</button></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{# End registry button #}
+{# Begin wishlist button #}
+{% if items_in_wishlist is empty %}
+{% set added = false %}
+{% else %}
+{% set added = true %}
+{% endif %}
+{% if wishlists is empty %}
+<div class="col-md-4 col-xs-6 no-padding-btn-right">
+    <button type="submit" name="action" value="wishlist" class="btn btn-block btn-default btn-bigger">
+        {% if added %}
+        <i class="fa fa-check"></i>
+        {% else %}
+        <i class="fa fa-star"></i>
+        {% endif %}
+        <span>Add to Wishlist</span>
+    </button>
+</div>
+{% else %}
+<div class="col-md-4 col-xs-6 no-padding-btn-right">
+    <button type="submit" name="action" value="wishlist" class="btn btn-block btn-default btn-bigger" data-toggle="dropdown">
+        {% if added %}
+        <i class="fa fa-check"></i>
+        {% else %}
+        <i class="fa fa-star"></i>
+        {% endif %}
+        <span>Add to Wishlist</span>
+    </button>
+    <ul class="dropdown-menu action-drop" style="margin-left:10px;" role="menu">
+        {% for wishlist in wishlists %}
+        <li><button type="submit" class="btn btn-block btn-default btn-sm" name="action" value="wishlist/{{wishlist.id}}">Add to '{{wishlist.name}}'</button></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{# End wishlist button #}

@@ -1,0 +1,111 @@
+      <!-- Footer
+      =================================================== -->
+      <footer class="footer-block">
+      
+        <!-- Container -->
+        <div class="container cont-top clearfix">
+        
+          <!-- Row -->
+          <div class="row">
+          
+            <!-- Brand -->
+            <div class="col-md-3 brand-col brand-center">
+              <div class="vcenter">
+                <div class="vcenter-this">
+                                      {% if app.params.logoimages is not empty %}
+                        {% set logo_info = app.params.logoimages | first %}
+                        {% set logo = logo_info.url %}
+                    {% endif %}
+                    {% if logo is not empty %}
+                        <a href="{{app.url}}/" class="img-responsive" style="background-image: url({{ logo }}); background-position: 50% 20%;  background-repeat: no-repeat; display: block; height:110px; background-size: contain;"></a>
+                    {% else %}
+                        <div id="logo-txt"><a style="font-size:30px;" href="{{app.url}}/">{{ app.params.site.title|striptags|slice(0, 32) }}</a></div>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+            <!-- /Brand -->
+            
+            <!-- Links -->
+            <div class="col-md-9 links-col">
+            
+              <!-- Row -->
+              <div class="row-fluid">
+              
+                <!-- Col -->
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <h5>About us</h5>
+                  <p>{{ app.params['business-info']['about-us'] }}</p>
+                    <!-- hlinks -->
+                    {# Social Network Icons if found in config file #}
+                    {# if social settings is not set in the config file, just do nothing #}
+                    {% if app.params.social_settings is defined and app.params.social_settings is not empty %}
+                      {{ social.social_parseConfig(app.params.social_settings) }}
+                    {% endif %}
+                    {# End Social Network Icons #}
+                    <!-- /hlinks -->              
+                </div>
+                <!-- /Col -->
+                
+                <!-- Col -->
+                <div class="col-xs-6 col-sm-3 col-md-3">
+                  <h5>member</h5>
+                  <ul class="vlinks">
+                    <li><a href="{{app.url}}/account">Account</a></li>
+                    <li><a href="{{app.url}}/account/wishlists">Wishlist and Favourites</a></li>
+                    <li><a href="{{app.url}}/account/orders">Purchase History</a></li>
+                    <li><a href="{{app.url}}/cart">View Cart</a></li>
+                  </ul>
+                </div>
+                <!-- /Col -->
+                
+                <!-- Col -->
+                <div class="col-xs-6 col-sm-3 col-md-3 newsletter">
+                <!--  <h5>some gallery</h5>
+                  <ul class="grid-list cols-3 cell-pad-5">
+                    <li><img src="{{ app.url_asset }}/images/diego/gal1.jpg" alt="" /></li>
+                    <li><img src="{{ app.url_asset }}/images/diego/gal2.jpg" alt="" /></li>
+                    <li><img src="{{ app.url_asset }}/images/diego/gal3.jpg" alt="" /></li>
+                    <li><img src="{{ app.url_asset }}/images/diego/gal4.jpg" alt="" /></li>
+                    <li><img src="{{ app.url_asset }}/images/diego/gal5.jpg" alt="" /></li>
+                    <li><img src="{{ app.url_asset }}/images/diego/gal6.jpg" alt="" /></li>
+                  </ul>-->
+                </div>
+                <!-- /Col -->
+                
+             </div>
+             <!-- /Row -->
+             
+            </div>
+            <!-- /Links -->
+            
+          </div>
+          <!-- /Row -->
+          
+        </div>
+        <!-- /Container -->
+        
+        <!-- Bottom -->
+        <div class="footer-bottom invert-colors">
+        
+          <!-- Container -->
+          <div class="container">
+          
+            <span class="copy-text">Copyright &copy; {{ app.params.site.title }} {{"now"|date("Y")}}. All right reserved. Powered by Acenda.</span>
+            <!-- hlinks -->
+            <ul class="hlinks pull-right">
+                    <li><a href="{{app.url}}/about"> About </a></li>
+                    <li><a href="{{app.url}}/contact"> Contact </a></li>
+                    <li><a href="{{app.url}}/content/faq">Help &amp; FAQs</a></li>                        
+                    <li><a href="{{app.url}}/content/privacy-policy">Privacy &amp; Security</a></li>
+                    <li><a href="{{app.url}}/content/terms-and-conditions"> Terms &amp; Conditions </a></li>
+            </ul>
+            <!-- /hlinks -->
+            
+          </div>
+          <!-- /Container -->
+          
+        </div>
+        <!-- /Bottom -->
+        
+      </footer>
