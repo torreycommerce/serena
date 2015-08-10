@@ -1,24 +1,6 @@
 {% extends "/_layouts/theme.html.twig" %}
 {% import "/_macros/form-elements-bootstrap.html.twig" as forms %}
 {% block breadcrumb %}
-      <!-- Intro Block
-      ============================================-->
-      <section class="intro-block intro-page boxed-section cover-4 overlay-dark-m">
-      
-        <!-- Container -->
-        <div class="container">     
-          <!-- Section Title -->
-          <div class="section-title invert-colors no-margin-b">
-            <h2><i class="fa fa-gift"></i> Gift Registry</h2>
-            <p class="hidden-xs"></p>
-          </div>
-          <!-- /Section Title -->
-        </div>
-        <!-- /Container -->
-      
-      </section>
-      <!-- /Intro Block
-      ============================================-->
 {{ base.breadcrumbs({'Search Registries':''}) }}
 {% endblock %}
 {% block content %}
@@ -32,11 +14,20 @@
     {% set params = params + {privacy:'public'} %}
     {% set registries = api.get('/registry', {query:params}) %}
 {% endif %}
-<div class="container main-container">
-    <div id="registry_search">
-        <div class="row">
-            <div class="col-md-6 col-lg-6">
-            <div class="well">
+<div id="customer-account" class="container-fluid title">
+    <!-- Container -->
+    <div class="row">     
+      <!-- Section Title -->
+      <div class="col-sm-12">
+        <h2><i class="fa fa-gift"></i> Gift Registry</h2>
+        <p class="hidden-xs"></p>
+      </div>
+      <!-- /Section Title -->
+    </div>
+    <!-- /Container -->
+    <div id="registry_search" class="row">
+        <div class="col-md-6 col-lg-6">
+            <div class="well"> <!-- Well -->
                 <h4>Find a Registry</h4>
 
                 {{ forms.begin('registry_search','','get',{class:'form-horizontal'}) }}
@@ -88,42 +79,51 @@
                         {% endif %}                    
                     </div>
                 </div>
+            </div><!-- /Well -->
+            {{ forms.end() }}
+        </div> <!-- /ENd Column -->
+        <div class="col-md-6 col-lg-6">
+            <div class="well">
+                <h4>Create a New Registry</h4>
+                <p>Please login to create a new registry</p>
+                <a class="btn btn-primary" href="{{ app.url }}/account/registries"><i class="fa fa-plus"></i> Create a New Registry</a>
             </div>
-                {{ forms.end() }}
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <div class="well">
-                    <h4>Create a New Registry</h4>
-                    <p>Please login to create a new registry</p>
-                    <a class="btn btn-primary" href="{{ app.url }}/account/registries"><i class="fa fa-plus"></i> Create a New Registry</a>
-                </div>
-            </div>
-        </div>
+        </div> <!-- /ENd Column -->
 
-    {% if registries is not empty %}
-    <div class="search-results">
-        <div class="well">
-            {% for registry in registries %}
-            <div class="registry">
-                <div class="row">        
-                    <div class="col-sm-4 col-md-2 col-lg-2">
-                        <div>Date: {{ registry.event_date }}</div>
+        {% if registries is not empty %}
+        <div class="search-results">
+            <div class="well">
+                {% for registry in registries %}
+                <div class="registry">
+                    <div class="row">        
+                        <div class="col-sm-4 col-md-2 col-lg-2">
+                            <div>Date: {{ registry.event_date }}</div>
+                        </div>
+                        <div class="col-sm-8 col-md-4 col-lg-4">
+                            <div><a href="{{app.url}}/registry/{{registry.id}}">{{ registry.name }}</a></div>
+                        </div>            
+                        <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0 col-lg-3  col-lg-offset-0">
+                            <div>{{ registry.first_name }}&nbsp;{{registry.last_name}}</div>
+                        </div>
+                        <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0 col-lg-3 col-lg-3 col-lg-offset-0">
+                            <div>{{ registry.city }}, {{ registry.state }}</div>
+                        </div>
                     </div>
-                    <div class="col-sm-8 col-md-4 col-lg-4">
-                        <div><a href="{{app.url}}/registry/{{registry.id}}">{{ registry.name }}</a></div>
-                    </div>            
-                    <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0 col-lg-3  col-lg-offset-0">
-                        <div>{{ registry.first_name }}&nbsp;{{registry.last_name}}</div>
-                    </div>
-                    <div class="col-sm-8 col-sm-offset-4 col-md-3 col-md-offset-0 col-lg-3 col-lg-3 col-lg-offset-0">
-                        <div>{{ registry.city }}, {{ registry.state }}</div>
-                    </div>
-                </div>
-            </div>   
-            {% endfor %}
+                </div>   
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div> <!-- /ENd Row -->
+    <div class="row">
+        <div class="col-sm-12 clearfix">
+            <ul class="pager">
+                <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
+                </li>
+                <li class="next pull-left"><a href="{{app.url}}/account/">&larr; Back to My Account</a></li>
+            </ul>
         </div>
     </div>
-    {% endif %}
-    </div>
+    <div style="clear:both"></div>
 </div>
 {% endblock %}

@@ -27,13 +27,12 @@ Load in the tabs for the page, pass in the name of this page, and make sure it's
 set in the array in /account/_macros/base.html.twig
 #}
 {% set reviews = api.get('/productreview',{'query': {'customer_id':app.user.id } }) %}
-<div class="container main-container">
+<div id="reviews-account" class="container-fluid title">
     <div class="row">
         {# Begin reviews #}
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-comments"></i> 
-                Your Reviews</span>
-            </h1><hr/>
+        <div class="col-sm-12">
+            <h2><span><i class="fa fa-comments"></i> 
+                Your Reviews</span></h2>
             <div class="row userInfo hidden-xs">
                 <div class="col-xs-12 col-sm-12">
                     {# Begin navigation #}
@@ -48,7 +47,7 @@ set in the array in /account/_macros/base.html.twig
     </div> <!-- /Row -->
     <div class="row userInfo">
         <div class="w100 clearfix">
-            <div class="col-sm-12 col-md-9 col-lg-10 ">
+            <div class="col-sm-12">
                 <div class="panel">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped tablesorter">
@@ -80,7 +79,7 @@ set in the array in /account/_macros/base.html.twig
         {#Button Group#}
     </div> <!-- /Row -->
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

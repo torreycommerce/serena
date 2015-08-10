@@ -27,15 +27,13 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 Load in the tabs for the page, pass in the name of this page, and make sure it's
 set in the array in /account/_macros/base.html.twig
 #}
-<div id="notifications" class="content-block default-bg ">
-    <div class="container cont-main no-pad-t">
-        <div class="row">
+<div id="notifications" class="container-fluid title">
+    <div class="row">
         {# Begin Notifications #}
         {# Begin header #}
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-exclamation-circle"></i> 
-                Your Notification </span>
-            </h1><hr/>
+        <div class="col-sm-12 clearfix">
+            <h2><span><i class="fa fa-exclamation-circle"></i> 
+                Your Notification </span></h2>
             <div class="row userInfo hidden-xs">
                 <div class="col-xs-12 col-sm-12">
                     {# Begin navigation #}
@@ -47,10 +45,9 @@ set in the array in /account/_macros/base.html.twig
                 </div>
             </div>
         </div>
-    </div><!-- /Row -->
     {# End header #}
     <div class="row userInfo">
-        <div class="col-sm-12 col-md-9 col-lg-10 no-padding-right clearfix">
+        <div class="col-sm-12 clearfix">
             {% set sort   = app.request.get.sort is defined ? app.request.get.sort : 'id:-1' %}
             {% set search = app.request.get.s is defined ? app.request.get.s : '' %}
             {% set query  = app.request.get.query is defined ? app.request.get.query : [] %}
@@ -67,14 +64,14 @@ set in the array in /account/_macros/base.html.twig
                 <form method="get" class="header-search" onsubmit="document.location.href='{{app.request.getUrl({'page':1,'sort':(sort),'s':''})}}'+''+$('#searchlist').val();return false;">
                     <div class="form-group">
                         <input type="text" id="searchlist" name="s" value="{{app.request.get.s|e}}" class="form-control" placeholder="Search">
-                        <button type="submit" class="btn btn-empty btn-search"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn-empty btn-search"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <div class="panel">
                 {{ list.create(columns, notifications, '/account/notification/{id}', 'sort', {'unread':'boolean','date_created':'date'}, ['delete']) }}
             </div>
@@ -83,7 +80,7 @@ set in the array in /account/_macros/base.html.twig
     {# End pagination #}
     {# Begin bottom actions #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

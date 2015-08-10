@@ -43,14 +43,12 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 Load in the tabs for the page, pass in the name of this page, and make sure it's
 set in the array in /account/_macros/base.html.twig
 #}
-<div id="my addresses" class="content-block default-bg">
-    <div class="container cont-main no-pad-t">
+<div id="my addresses" class="container-fluid title">
     <div class="row">
     {# Begin Address #}
     {# Begin header #}
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-map-marker"></i> My addresses </span>
-            </h1><hr/>
+        <div class="col-sm-12">
+            <h2><span><i class="fa fa-map-marker"></i> My addresses </span></h2>
             <div class="row userInfo hidden-xs">
                 <div class="col-xs-12 col-sm-12">
                     {# Begin navigation #}
@@ -65,15 +63,15 @@ set in the array in /account/_macros/base.html.twig
                 <div class="col-xs-12 col-sm-12">
                     <p>Please configure your default billing and delivery addresses when placing an order. You may also add
                      additional addresses, which can be useful for sending gifts or receiving an order at your office.</p>
-                    <h4> Your addresses are listed below. </h4>
+                    <b> Your addresses are listed below. </b>
                     <p> Be sure to update your personal information if it has changed.</p>
                 </div>
-            </div>
-        </div> <!-- /Row -->
+            </div> <!-- /Row -->
 
-    {# End header #}
-    {# End Address #}
-    </div>  <!-- /Row -->
+        {# End header #}
+        {# End Address #}
+        </div>  <!-- /col-sm-12 -->
+    </div>  <!-- /row -->
     <div class="row userInfo">
         <div class="w100 clearfix">
                 {% set addresses = api.get('/customeraddress',{'query':{'customer_id':app.user.id}}) %}
@@ -109,26 +107,26 @@ set in the array in /account/_macros/base.html.twig
                                 <span class="text-danger">Please verify this address by clicking the edit address link under options below and fill in any missing information.</span>
                                 {% endif %}
                             </div>
-                            <div class="panel-footer panel-footer-address">
+                            <div class="panel-footer-address">
                                 <div class="btn-group">
-                                    <a class="btn btn-neutral dropdown-toggle" data-toggle="dropdown">
+                                    <a class="btn btn-outline dropdown-toggle" data-toggle="dropdown">
                                         <span class="text">Options</span>
                                         <i class="fa fa-caret-down"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <span class="text">
-                                                <a href="{{ app.url }}/account/addresses/{{ row + 1 }}/edit" class="btn btn-link" name="edit_address">
+                                                <a href="{{ app.url }}/account/addresses/{{ row + 1 }}/edit" class="btn btn-outline btn-link" name="edit_address">
                                                     <i class="fa fa-pencil"></i> Edit Address
                                                 </a>
                                             </span>
                                         </li>
                                         <li>
                                             {{ forms.submit('address[action]', 'primary/' ~  (row + 1), '<i class="fa fa-star"></i>
-                                                <span class="text"> Use as primary address</span>', {class:'btn btn-link'})}}
+                                                <span class="text"> Use as primary address</span>', {class:'btn btn-outline btn-link'})}}
                                         </li>
                                         <li>
-                                            {{ forms.submit('address[action]', 'delete/'  ~  (row + 1), '<i class="fa fa-times"></i> <span class="text"> Delete</span>', {class:'btn btn-link'})}}
+                                            {{ forms.submit('address[action]', 'delete/'  ~  (row + 1), '<i class="fa fa-times"></i> <span class="text"> Delete</span>', {class:'btn btn-outline btn-link'})}}
                                         </li>
                                     </ul>
                                 </div>
@@ -141,14 +139,14 @@ set in the array in /account/_macros/base.html.twig
     </div> <!-- /Row -->
     {# New Address Button #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <a class="btn   btn-primary" href="{{app.url}}/account/addresses/new"><i class="fa fa-plus-circle"></i> Add New Address </a>
         </div>
     </div> <!-- /Row -->
     {# End Address Button #}
     {# Begin bottom actions #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

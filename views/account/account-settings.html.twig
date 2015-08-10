@@ -21,13 +21,12 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 {% endblock %}
 
 {% block content %}
-<div class="container main-container">
+<div id="customer-account" class="container-fluid title">
     <div class="row">
     {# Begin account settings #}
-            <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-cog"></i> 
-                My account settings </span></h1>
-                <hr/>
+            <div class="col-sm-12">
+            <h2><span><i class="fa fa-cog"></i> 
+                My account settings </span></h2>
                 <div class="row userInfo hidden-xs">
                     <div class="col-xs-12 col-sm-12">
                         {# Begin navigation #}
@@ -43,7 +42,7 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
         </div>
     </div>
     <div class="row userInfo">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             {% if app.request.post.change_password %}
                 {% if (api.post('/customer/'~ app.user.id ~'/validatepassword', {'password':app.request.post.change_password.current_password} )) %}
                     {% if api.put('/customer/' ~ app.user.id ~ '/changepassword/', app.request.post.change_password ) == false %}
@@ -184,7 +183,7 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     </div>
     {# End account settings #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

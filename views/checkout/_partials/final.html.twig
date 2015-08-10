@@ -15,15 +15,13 @@
 {% endif %}
 
 {% do app.user.setState('order_sent', null) %}
-<div class="container main-container">
+<div id="customer-account" class="container-fluid title">
     <div class="row transitionfx">
-        <div class="col-lg-9 col-md-9 col-sm-7">
+        <div class="col-sm-12">
             {% if response is not empty %}
-                <h1 class="section-title-inner"><span>
-                <i class="glyphicon glyphicon-shopping-cart"></i> Thank You </span></h1>
+                <h2><i class="glyphicon glyphicon-shopping-cart"></i> Thank You </span></h2>
             {% else %}
-                <h1 class="section-title-inner"><span>
-                <i class="glyphicon glyphicon-exclamation-sign"></i> Order failed </span></h1>
+                <h2><i class="glyphicon glyphicon-exclamation-sign"></i> Order Failed </span></h2>
             {% endif %}
         </div>
         <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
@@ -186,7 +184,7 @@
                             </div>
                         </div>
                         <div class="gap"></div>
-                        <div class="cartFooter w100">
+                        <div class="w100">
                             <div class="box-footer actions">
                                 <div class="pull-right"><a href="{{app.url}}/" class="btn btn-primary">Continue to shopping <i class="fa fa-arrow-circle-right"></i> </a></div>
                             </div>

@@ -23,21 +23,19 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 Load in the tabs for the page, pass in the name of this page, and make sure it's
 set in the array in /account/_macros/base.html.twig
 #}
-<div id="customer-account" class="content-block default-bg ">
-    <div class="container cont-main no-pad-t">
+<div id="customer-account" class="container-fluid title">
+    <div class="row">
         {# Begin account center #}
         {# Begin page header #}    
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i>Hello {{ app.user.first_name|title }}!</span></h1>
+        <div class="col-sm-12">
+            <h2><span><i class="fa fa-unlock-alt"></i> Hello {{ app.user.first_name|title }}!</span></h2>
             {# End page header #}  
             <div class="row userInfo">
                 <div class="col-xs-12 col-sm-12">
-
                     <p class="hidden-xs">Welcome to your account. Here you can manage all of your personal information and orders.</p>
-                    </h2>
                     {# Begin navigation #}
                     <div class="navigation">
-                            {{account.navigation('whishlist')}}
+                            {{account.navigation('account center')}}
                     </div>
                     {# End navigation #}
                     <div class="clear clearfix"></div>

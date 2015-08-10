@@ -11,12 +11,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="container main-container">
+<div id="view-whishlist" class="container-fluid title">
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-heart"></i> 
+        <div class="col-sm-12">
+            <h2 class="section-title-inner"><span><i class="fa fa-heart"></i> 
                 View Wishlist of {{ wishlist.name }}</span>
-                </h1><hr/>
+                </h2>
                 {# Begin navigation #}
                 <div class="row userInfo hidden-xs">
                     <div class="col-xs-12 col-sm-12">
@@ -33,14 +33,14 @@
     </div>
     {# Begin content #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             {% include '/wishlist/_partials/list.html.twig' %}
         </div>
     </div>
     {# End content #}
     {# Begin bottom actions #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>
@@ -49,6 +49,5 @@
         </div>
     </div> <!-- /Row -->
     {# End bottom actions #}
-<div class="gap"></div>
 </div>
 {% endblock %}

@@ -33,14 +33,13 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 {% endif %}
 
 {% endif %}
-<div class="container main-container">
+<div id="registries-account" class="container-fluid title">
     <div class="row">
         {# Begin registries #}
         {# Begin header #}
-            <div class="col-sm-12 col-md-9 col-lg-10">
-                <h1 class="section-title-inner"><span><i class="fa fa-gift"></i> 
-                    New Registries</span>
-                </h1><hr/>
+            <div class="col-sm-12">
+                <h2><span><i class="fa fa-gift"></i> 
+                    New Registries</span></h2>
                 <div class="row userInfo hidden-xs">
                     <div class="col-xs-12 col-sm-12">
                         {# Begin navigation #}
@@ -55,12 +54,12 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     </div> <!-- /Row -->
     {# End header #}
     <div class="row userInfo">
-        <div class="col-sm-12 col-md-9 col-lg-10 no-padding-left clearfix">
+        <div class="col-sm-12 clearfix">
             {{ form.begin('registry') }}
             {% set registries = api.get('/registry',{query:{"customer_id":app.user.id}}) %}
             {% if registries is empty %}
-            <div class="col-sm-12 col-md-9 col-lg-10">
-            <h2 class="block-title-2">Create a new registries.</h2>
+            <div>
+            <h3>Create a new registries.</h3>
             <p>There are no registries.</p>
             </div>
             {% else %}
@@ -93,14 +92,14 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     </div> <!-- /Row -->              
     {# Registry Button #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <a class="btn btn-primary" href="{{app.url}}/account/registry/create"><i class="fa fa-plus"></i>Create a new registry</a>
         </div>
     </div>
     {# End Registry Button #}
     {# Begin bottom actions #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

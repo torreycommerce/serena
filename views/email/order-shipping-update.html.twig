@@ -251,7 +251,7 @@
                                                                         <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
                                                                             <tr>
                                                                                 <td align="left" class="textContent">
-                                                                                    <h3 style="color:#E7214C;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Shipping Address</h3>
+                                                                                    <h3 style="color:#67C4B0;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Shipping Address</h3>
                                                                                     <div style="text-align:left;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">                           {{ order.shipping_first_name }} {{ order.shipping_last_name }} <br>
                                                                                     {% if order.giftlist_present is empty %}<br>
                                                                                     {{ order.shipping_street_line1}} {{ order.shipping_street_line2}}<br>
@@ -268,7 +268,7 @@
                                                                         <table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
                                                                             <tr>
                                                                                 <td align="left" class="textContent">
-                                                                                    <h3 style="color:#E7214C;line-height:125%;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Delivery Method</h3>
+                                                                                    <h3 style="color:#67C4B0;line-height:125%;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Delivery Method</h3>
                                                                                     <div style="text-align:left;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Using {{ shipping_method.name }} <br>
                                                                                     {% for item in items %} <br>
                                                                                     {% if item.status == 'shipped' %}
@@ -315,7 +315,7 @@
                                                                         <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
                                                                             <tr>
                                                                                 <td align="left" class="textContent">
-                                                                                    <h3 style="color:#E7214C;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Products</h3>
+                                                                                    <h3 style="color:#67C4B0;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;">Products</h3>
                                                                                     <div style="text-align:left;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Status: {{ item.status }} <br>
                                                                                     URL: {{app.live_url}}{{products[item.product_id].0.url}} <br>
                                                                                     SKU: {{item.sku}} <br>
@@ -328,7 +328,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td align="left" class="textContent">
-                                                                                    <h3 style="color:#E7214C;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;"><br/>Please Note:</h3>
+                                                                                    <h3 style="color:#67C4B0;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left; text-transform: uppercase;"><br/>Please Note:</h3>
                                                                                     <div style="text-align:left;font-family: 'Source Sans Pro', sans-serif, helvetica, arial;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">If your order was placed after-hours or on the weekend your tracking number will not be active until the next business day when the package is picked up by the carrier.</div>
                                                                                 </td>
                                                                             </tr>                                                                            

@@ -38,14 +38,14 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 {% include "/account/wishlist/_partials/makeDefault.html.twig" %}
 {% endif %}
 {% endif %}
-<div class="container main-container">
+<div id="wishlist-account" class="container-fluid title">
     <div class="row">
     {# Begin wishlists #}
-        <div class="col-sm-12 col-md-9 col-lg-10">
+        <div class="col-sm-12">
             {# Begin header #}
-            <h1 class="section-title-inner"><span><i class="fa fa-heart"></i> 
+            <h2><span><i class="fa fa-heart"></i> 
                  Your Wishlists</span>
-            </h1><hr/>
+            </h2>
             <div class="row userInfo hidden-xs">
                 <div class="col-xs-12 col-sm-12">
                     {# Begin navigation #}
@@ -66,7 +66,7 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
             {% set wishlists = api.get('/wishlist',{query:{"customer_id":app.user.id}}) %}
 
             {% if wishlists is empty %}
-            <div class="col-sm-12 col-md-9 col-lg-10">
+            <div class="col-sm-12">
                 <h2 class="block-title-2">Create a new wishlist.</h2>
                 <p>There are no wishlists.</p>
             </div>
@@ -83,7 +83,7 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
                             <div class="privacy">{{ wishlist.privacy }}</div>
                             <div class="default">{% if wishlist.default %}default wishlist{% endif %}</div>
                         </div>
-                        <div class="panel-footer">
+                        <div>
                             <a class="btn btn-neutral" href="{{app.url}}/wishlist/{{wishlist.id}}">View</a>
                         </div>
                     </div>
@@ -96,14 +96,14 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     </div> <!-- /Row -->   
     {# Begin actions #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <a class="btn btn-primary" href="{{ app.request.base}}/account/wishlist/create"><i class="fa fa-plus"></i>&nbsp;Create a new wishlist</a>
         </div>
     </div>
     {# End actions #}
     {# Begin Button Group#}
    <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>

@@ -1,0 +1,18 @@
+      <div id="main-nav" class="">
+        <div class="container-fluid"> 
+          <div class="nav-header">
+          {% if app.params.logoimages is not empty %}
+                        {% set logo_info = app.params.logoimages | first %}
+                        {% set logo = logo_info.url %}
+                    {% endif %}
+                    {% if logo is not empty %}
+                        <a href="{{app.url}}/">
+                        <img src="{{ logo }}" class="brand-logo"></a>
+                    {% else %}
+                        <div id="logo-txt"><a class="nav-brand" href="{{app.url}}/">{{ app.params.site.title|striptags|slice(0, 32) }}</a></div>
+                    {% endif %}
+              <a class="nav-icon pull-right visible-xs menu-link" href="#"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+              <a class="nav-icon-outline cart pull-right" href="cart.html"><i class="glyphicon glyphicon-shopping-cart"></i><span class="badge">3</span></a>
+            </div>
+        </div>
+      </div>  

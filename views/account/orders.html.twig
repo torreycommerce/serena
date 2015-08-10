@@ -23,14 +23,13 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
 {% endblock %}
 
 {% block content %}
-<div class="container main-container">
+<div id="your-orders" class="container-fluid title">
     <div class="row">
     {# Begin Order History #}
     {# Begin Header #}
-        <div class="col-sm-12 col-md-9 col-lg-10">
-            <h1 class="section-title-inner"><span><i class="fa fa-calendar"></i> 
-                Your Orders</span>
-            </h1><hr/>
+        <div class="col-sm-12">
+            <h2><span><i class="fa fa-calendar"></i> 
+                Your Orders</span></h2>
             <div class="row userInfo hidden-xs">
                 <div class="col-xs-12 col-sm-12">
                     {# Begin navigation #}
@@ -45,9 +44,9 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     </div> <!-- /Row -->
     {# End header #} 
     <div class="row userInfo">
-        <div class="col-sm-12 col-md-9 col-lg-10 no-padding-left clearfix">
+        <div class="col-sm-12 clearfix">
             {# Begin order filter #}
-            <div class="col-sm-4 col-md-4 col-lg-3 no-padding-right">
+            <div class="pull-left">
                 <div class="order-filter">
                     {{ forms.begin('ordersearch', app.url ~ '/account/orders', 'get') }}
                     {{ forms.select('daterange', app.request.get.daterange|e, {'-6 months':'6 months ago', '-3 months' : '3 months ago', '-1 month' : '1 month ago', '-1 week' : '1 week ago', '-1 day' : '1 day ago', '' : 'All orders'}, {class:'form-control'}) }}
@@ -55,11 +54,11 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
             </div>
             {# End order filter #}
             {# Begin order search #}
-            <div class="search-within no-padding-right col-sm-6 col-sm-offset-2 col-md-4 col-md-offset-4 col-lg-3 col-lg-offset-6">
+            <div class="pull-right">
             <form class="header-search">
                 <div class="form-group">
                     <input type="text" id="searchlist" name="q" value="{{app.request.get.q|e}}" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-empty btn-search"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn-empty btn-search"><i class="fa fa-search"></i></button>
                 </div>
                 </form>
             </div>
@@ -75,21 +74,21 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     {% endif %}
     {% set orders = api.get('/order', {query:{customer_id:app.user.id} + query,search:app.request.get.q,sort:'id:-1',limit:limit,page:app.request.get.page}) %}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             {{ base.pagination(orders.num_total,limit) }}
         </div>
     </div>
     {# End pagination #}
     {% if orders is empty %}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">    
+        <div class="col-sm-12">    
             <p>There are no orders.</p>
         </div>
     </div>
     {% endif %}
     {% for order in orders %}
     {# Begin order #}
-    <div class="col-sm-12 col-md-9 col-lg-10 no-padding-side clearfix">
+    <div class="col-sm-12 clearfix">
         <div class="order">
             <div class="well">
                 <div class="row">
@@ -165,13 +164,13 @@ Passed into the macro is a array of key:value pairs as (title):(relative url)
     {% endfor %}
     {# Begin pagination #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             {{ base.pagination(orders.num_total,limit) }}
         </div>
     </div>
     {# End pagination #}
     <div class="row">
-        <div class="col-sm-12 col-md-9 col-lg-10 clearfix">
+        <div class="col-sm-12 clearfix">
             <ul class="pager">
                 <li class="previous pull-right"><a href="{{app.url}}/"> <i class="fa fa-home"></i> Go to Shop </a>
                 </li>
