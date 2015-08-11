@@ -1,108 +1,97 @@
       <!-- Products
       ============================================ -->
-            <div class="container-fluid productlist">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <a href="product1.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_1a.jpg" class="img-responsive" alt="item">
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">14.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="product2.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_2a.jpg"  class="img-responsive" alt="item">
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">28.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="product3.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_3a.jpg"  class="img-responsive" alt="item">
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">24.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 special">
-                        <div class="col-sm-12">
-                            <a href="product4.html">
-                                <img src="{{ app.url_asset }}/images/serena/vase_4a.jpg"  class="img-responsive" alt="item">
-                                <span class="productlist-price-container">
-                                    <span class="product-price">
-                                        <span class="price">16.00</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="col-sm-12">
-                            <a href="product5.html">
-                                <img src="{{ app.url_asset }}/images/serena/vase_5a.jpg"  class="img-responsive" alt="item">
-                                <div class="productlist-label">
-                                    <span class="label-sale">Sale</span>
-                                </div>
-                                <span class="productlist-price-container">
-                                    <span class="product-price">
-                                        <span class="price">54.00</span>
-                                        <span class="original-price">
-                                            <span class="price">65.00</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </a>                        
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <a href="product6.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_6a.jpg" class="img-responsive" alt="item">
-                            <div class="productlist-label">
-                                <span class="label-new">Sold Out</span>
-                            </div>
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">38.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row" id="more-items">
-                    <div class="col-sm-6">
-                        <a href="product7.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_7a.jpg"  class="img-responsive" alt="item">
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">17.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="product8.html">
-                            <img src="{{ app.url_asset }}/images/serena/vase_8a.jpg"  class="img-responsive" alt="item">
-                            <span class="productlist-price-container">
-                                <span class="product-price">
-                                    <span class="price">21.00</span>
-                                </span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 text-center show-more">
-                        <a href="#" class="btn btn-outline" id="showmore">Show more</a>
-                    </div>  
-                </div>  
+
+{% set pattern = {} %}
+{% set items_per_row = 4 %}
+{% set collection_ids = [] %}
+{% set product_count = 1 %}
+{% set options = ['image'] %}
+{% set products_temp = api.get('/catalog', {sort:"product.variant.popularity:-1",limit:9}) %}
+{% set products = [] %}
+{% for index,product in products_temp if collection_ids[product.id] is empty and product_count < 10 %}
+    {% set product_count = product_count + 1 %}
+    {% set product =  product|merge({'variant':product.product|values_in('variant')}) %}
+    {% set product =  product|merge({'attributes':product.variant|values_in(['price','compare_price','save_price','save_percent','color'])}) %}
+    {% set products = products|merge([product]) %}
+{% endfor %}
+
+{% if product.images is not empty %}
+    {#
+     {% set image_url = app.image.getImageUrl('product','thumbnail', product.images[0].id) %} 
+    #}
+{% endif %}
+
+<div class="container-fluid productlist">
+
+    <div class="row">
+        <div class="col-sm-8">
+            {% set product = products[0] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            {% set product = products[1] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            {% set product = products[2] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 special">
+            <div class="col-sm-12">
+                {% set product = products[3] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
             </div>
-      <!-- /Products
-      ============================================ -->
+            <div class="col-sm-12">
+                {% set product = products[4] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}            
+            </div>
+        </div>
+        <div class="col-sm-8">
+            {% set product = products[5] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+    </div>
+{% if products[6] %}
+    <div class="row" id="more-items">
+        <div class="col-sm-8">
+            {% set product = products[6] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            {% set product = products[7] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            {% set product = products[8] %}
+            {% if product %}
+                {% include "_partials/promo/product_tile.html.twig" %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center show-more">
+            <a href="#" class="btn btn-outline" id="showmore">Show more</a>
+        </div>  
+    </div> 
+{% endif %} 
+</div>
+<!-- /Products
+============================================ -->
