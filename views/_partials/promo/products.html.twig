@@ -6,9 +6,16 @@
 {% set collection_ids = [] %}
 {% set product_count = 1 %}
 {% set options = ['image'] %}
-{% set products_temp = api.get('/catalog', {sort:"product.variant.popularity:-1",limit:9}) %}
+{% set products_temp = api.get('/catalog', {sort:"product.variant.popularity:-1",limit:16}) %}
 {% set products = [] %}
-{% for index,product in products_temp if collection_ids[product.id] is empty and product_count < 10 %}
+{% for index,product in products_temp if collection_ids[product.id] is empty and product_count < 17 %}
+    {% if product.group == 'product' %}
+        {% for id in product.product.collection_id %}
+            {% set collection_ids = collection_ids|merge({(id):true}) %}
+        {% endfor %}
+    {% else %}
+        {% set collection_ids = collection_ids|merge({(product.id):true}) %}
+    {% endif %}
     {% set product_count = product_count + 1 %}
     {% set product =  product|merge({'variant':product.product|values_in('variant')}) %}
     {% set product =  product|merge({'attributes':product.variant|values_in(['price','compare_price','save_price','save_percent','color'])}) %}
@@ -66,24 +73,76 @@
         </div>
     </div>
 {% if products[6] %}
-    <div class="row" id="more-items">
-        <div class="col-sm-8">
-            {% set product = products[6] %}
-            {% if product %}
-                {% include "_partials/promo/product_tile.html.twig" %}
-            {% endif %}
+    <div id="more-items">
+        <div class="row">
+            <div class="col-sm-6">
+                {% set product = products[6] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
+            <div class="col-sm-6">
+                {% set product = products[7] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
         </div>
-        <div class="col-sm-4">
-            {% set product = products[7] %}
-            {% if product %}
-                {% include "_partials/promo/product_tile.html.twig" %}
-            {% endif %}
+        <div class="row">
+            <div class="col-sm-8">
+                {% set product = products[8] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                {% set product = products[9] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                {% set product = products[10] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
         </div>
-        <div class="col-sm-4">
-            {% set product = products[8] %}
-            {% if product %}
-                {% include "_partials/promo/product_tile.html.twig" %}
-            {% endif %}
+        <div class="row">
+            <div class="col-sm-4 special">
+                <div class="col-sm-12">
+                    {% set product = products[11] %}
+                    {% if product %}
+                        {% include "_partials/promo/product_tile.html.twig" %}
+                    {% endif %}
+                </div>
+                <div class="col-sm-12">
+                    {% set product = products[12] %}
+                    {% if product %}
+                        {% include "_partials/promo/product_tile.html.twig" %}
+                    {% endif %}            
+                </div>
+            </div>
+            <div class="col-sm-8">
+                {% set product = products[13] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                {% set product = products[14] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
+            <div class="col-sm-6">
+                {% set product = products[15] %}
+                {% if product %}
+                    {% include "_partials/promo/product_tile.html.twig" %}
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="row">
