@@ -197,7 +197,9 @@
            </div>
         {% endfor %}
      </div>
-              <form  action="product1.html" method="POST" class="myform">
+              
+
+                <div id="variation-selector-{{product.id}}"></div>
                  <!-- <div class="form-group clearfix">
                     <label class="control-label">Size</label>
                     <select class="form-control">
@@ -226,6 +228,66 @@
                        <option value="Wood">Wood</option>
                     </select>
                  </div>       -->
+                 
+                 <!-- {% if product.variant_options %}
+                    <div class="">
+                      {% for option in product.variant_options %}
+                          <div class="" id="variation-selector-{{product.id}}-{{option.name}}">
+                            <button class="" type="button" onclick="dropdown_trigger(this)">Select {{option.name}}</button>
+                            <div class="">
+                              <ul>
+                                {% for value in option.values %}
+                                  <li style="cursor:pointer;" class="" id="variation-selector-{{product.id}}-{{option.name}}-{{value}}">
+                                    {{value}}
+                                  </li class="option-value">
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          </div>
+                        {% endfor %}
+                    </div>
+                 {% endif %}
+ -->
+
+
+<!--  JUST FOR STYLING  -->
+
+<div class="" id="variation-selector-21-Material">
+  <button class="" type="button" onclick="dropdown_trigger(this)">Select Material</button>
+  <div class="" style="display: block;">
+    <ul>
+        <li style="cursor:pointer;" class="notavailable-selected">
+          Coton
+        </li>
+        <li style="cursor:pointer;" class="notavailable">
+          Gold
+        </li>
+        <li style="cursor:pointer;" class="selected">
+          Leather
+        </li>
+        <li style="cursor:pointer;" class="">
+          Silk
+        </li>
+      </ul>
+  </div>
+</div>
+
+<style type="text/css">
+  .notavailable-selected{
+    text-decoration: line-through;
+    color:red;
+  }
+  .notavailable{
+    text-decoration: line-through;
+  }
+  .selected{
+    color:green;
+  }
+
+</style>
+
+
+              <form  action="product1.html" method="POST" class="myform">
                  <!-- / Begin Cart-actions -->
                  <div class="addto">
                     <div class="col-md-6 product-btn row">
