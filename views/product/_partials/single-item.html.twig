@@ -1,315 +1,225 @@
 <div class="container-fluid product">
-  <script type="text/javascript">
-     var VariantsData = {isCollection: false, products: []}
-   VariantsData.products.push({variants: {{product.variant|json_encode}}, variant_options: {{product.variant_options|json_encode}}});
-  </script>
-  <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
-     <div class="row visible-xs product-mobile">
-        <div class="col-xs-12 text-center">
-           <h2 class="product-title">{{product.title}}</h2>
-           {% for variation in product.variant %}
-           <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
-              <div class="product-price">
-              {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
-                 <span class="product-price">{{ prod.price(variation.price) }}</span>
-                 {# Begin regular price #}
-                 {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
-                 <span class="product-price original-price">{{ prod.price(variation.compare_price) }}</span>
-                 {% endif %}
-                 {# End regular price #}
-              </div>
-           </div>
-           {% endfor %}
-        </div>
-     </div>   
-     <div class="row product-details">
+    <script type="text/javascript">
+        var VariantsData = {isCollection: false, products: []}
+        VariantsData.products.push({variants: {{product.variant|json_encode}}, variant_options: {{product.variant_options|json_encode}}});
+    </script>
+    <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
+        <div class="row visible-xs product-mobile">
+            <div class="col-xs-12 text-center">
+                <h2 class="product-title">{{product.title}}</h2>
+                {% for variation in product.variant %}
+                   <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
+                        <div class="product-price">
+                        {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                            <span class="product-price">{{ prod.price(variation.price) }}</span>
+                            {# Begin regular price #}
+                            {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
+                                <span class="product-price original-price">{{ prod.price(variation.compare_price) }}</span>
+                            {% endif %}
+                            {# End regular price #}
+                        </div>
+                   </div>
+                {% endfor %}
+            </div>
+        </div>   
+    <div class="row product-details">
         {% for variation in product.variant %}
-           <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
-           {# Begin product images #}
-              <div id="product-images" class="col-sm-8">
-              {% set main_image_id = variation.images.0.id is not empty ? variation.images.0.id : product.images.0.id %}
-              {% set main_image_id = main_image_id is empty ? 'default' : main_image_id %}
-              <div id="image-main">
-                  <div class="row">
-                      <div class="col-sm-12">
-                          <div class="thumbnail">
-                              <span class="helper hidden-xs"></span>
-                              <div id="main-product-video" style="display:none"></div>
-                              <img onerror="this.src='{{ app.url_asset }}/images/product/image-900x900.jpg'" id="main-product-image" class="img-responsive" src="{{app.image.getImageUrl("product","standard",main_image_id) }}" data-image-zoom="{{app.image.getImageUrl("product","large",main_image_id) }}" alt="" />
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              {# End main image #}
-              {# Begin image carousel #}
-              {% if variation.images is not empty or variation.videos is not empty or product.images is not empty or product.videos is not empty %}
-                  <div id="image-carousel" class="hidden-xs row">
-                      <div class="image-carousel">
-                          <div id="image-carousel-{{variation.id}}" class="carousel">
-                              <div>
-                                  <div class="item active">
-                                      {% for image in variation.images %}
-                                          {% set name = image.name is not empty ? image.name : variation.name %}
-                                          <div class="col-sm-2">
-                                              <div class="thumbnail" data-tooltip="" data-toggle="tooltip" data-original-title="{{ name }}">
+            <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
+                {# Begin product images #}
+                <div id="product-images" class="col-sm-8">
+                    {% set main_image_id = variation.images.0.id is not empty ? variation.images.0.id : product.images.0.id %}
+                    {% set main_image_id = main_image_id is empty ? 'default' : main_image_id %}
+                    <div id="image-main">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="thumbnail">
+                                    <span class="helper hidden-xs"></span>
+                                    <div id="main-product-video" style="display:none"></div>
+                                    <img onerror="this.src='{{ app.url_asset }}/images/product/image-900x900.jpg'" id="main-product-image" class="img-responsive" src="{{app.image.getImageUrl("product","standard",main_image_id) }}" data-image-zoom="{{app.image.getImageUrl("product","large",main_image_id) }}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# End main image #}
+                    {# Begin image carousel #}
+                    {% if variation.images is not empty or variation.videos is not empty or product.images is not empty or product.videos is not empty %}
+                        <div id="image-carousel" class="hidden-xs row">
+                            <div class="image-carousel">
+                                <div id="image-carousel-{{variation.id}}" class="carousel">
+                                    <div>
+                                        <div class="item active">
+                                            {% for image in variation.images %}
+                                                {% set name = image.name is not empty ? image.name : variation.name %}
+                                                <div class="col-sm-2">
+                                                    <div class="thumbnail" data-tooltip="" data-toggle="tooltip" data-original-title="{{ name }}">
 
-                                                  <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" class="" src="{{app.image.getImageUrl("product","thumbnail",image.id,secure) }}" data-image-swap="main-product-image" data-image-swap-src="{{app.image.getImageUrl("product","standard",image.id) }}"  data-image-swap-zoom="{{app.image.getImageUrl("product","large",image.id) }}" alt="" />
-                                              </div>
-                                          </div>
-                                      {% endfor %}
-                                      {% for image in product.images %}
-                                          {% set name = image.name is not empty ? image.name : product.name %}
-                                          <div class="col-sm-2">
-                                              <div class="thumbnail" data-tooltip="" data-toggle="tooltip" data-original-title="{{ name }}">
+                                                        <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" class="" src="{{app.image.getImageUrl("product","thumbnail",image.id,secure) }}" data-image-swap="main-product-image" data-image-swap-src="{{app.image.getImageUrl("product","standard",image.id) }}"  data-image-swap-zoom="{{app.image.getImageUrl("product","large",image.id) }}" alt="" />
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            {% for image in product.images %}
+                                                {% set name = image.name is not empty ? image.name : product.name %}
+                                                <div class="col-sm-2">
+                                                    <div class="thumbnail" data-tooltip="" data-toggle="tooltip" data-original-title="{{ name }}">
 
-                                                  <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" class="" src="{{app.image.getImageUrl("product","thumbnail",image.id,secure) }}" data-image-swap="main-product-image" data-image-swap-src="{{app.image.getImageUrl("product","standard",image.id) }}"  data-image-swap-zoom="{{app.image.getImageUrl("product","large",image.id) }}" alt="" />
-                                              </div>
-                                          </div>
-                                      {% endfor %}
-                                      {% if variation.videos is not empty %}
-                                          {% do app.asset.js(app.url_asset ~ '/js/video-player.js') %}
-                                          {% for video in variation.videos %}
-                                              <div class="col-sm-2">
-                                                  <div class="thumbnail video" data-video-src="{{ video }}" data-tooltip="" data-toggle="tooltip" data-original-title="">
-                                                      <i class="video-icon fa fa-play-circle"></i><img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="">
-                                                  </div>
-                                              </div>
-                                          {% endfor %}
-                                      {% endif %}
-                                      {% if product.videos is not empty %}
-                                          {% do app.asset.js(app.url_asset ~ '/js/video-player.js') %}
-                                          {% for video in product.videos %}
-                                              <div class="col-sm-2">
-                                                  <div class="thumbnail video" data-video-src="{{ video }}" data-tooltip="" data-toggle="tooltip" data-original-title="">
-                                                      <i class="video-icon fa fa-play-circle"></i><img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="">
-                                                  </div>
-                                              </div>
-                                          {% endfor %}
-                                      {% endif %}
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              {% endif %}
-              {# End image carousel #}
-              </div>
+                                                        <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" class="" src="{{app.image.getImageUrl("product","thumbnail",image.id,secure) }}" data-image-swap="main-product-image" data-image-swap-src="{{app.image.getImageUrl("product","standard",image.id) }}"  data-image-swap-zoom="{{app.image.getImageUrl("product","large",image.id) }}" alt="" />
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            {% if variation.videos is not empty %}
+                                                {% do app.asset.js(app.url_asset ~ '/js/video-player.js') %}
+                                                {% for video in variation.videos %}
+                                                    <div class="col-sm-2">
+                                                        <div class="thumbnail video" data-video-src="{{ video }}" data-tooltip="" data-toggle="tooltip" data-original-title="">
+                                                            <i class="video-icon fa fa-play-circle"></i><img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="">
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if product.videos is not empty %}
+                                                {% do app.asset.js(app.url_asset ~ '/js/video-player.js') %}
+                                                {% for video in product.videos %}
+                                                    <div class="col-sm-2">
+                                                        <div class="thumbnail video" data-video-src="{{ video }}" data-tooltip="" data-toggle="tooltip" data-original-title="">
+                                                            <i class="video-icon fa fa-play-circle"></i><img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="">
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# End image carousel #}
+                </div>
             </div>
             {# End product images #}
-           {% endfor %}
-           <div class="col-sm-4 ">
-              <h3 class="product-title hidden-xs"><a href="{{app.url}}/brand/{{product.brand|url_encode}}">{{product.brand}}</a></h3>
-              <h2 class="product-title hidden-xs">{{product.title}}</h2>
-               {% for variation in product.variant %}
-              <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
-                 {# Begin Product Prices #}
-                 {% if variation.price > 0 %}
-                 <div class="product-price hidden-xs">
-                    {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
-                    <span class="product-price">{{ prod.price(variation.price) }}</span>
-                    {# Begin regular price #}
-                    {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
-                    <span class="product-price original-price">{{ prod.price(variation.compare_price) }}</span>
-                    {% endif %}
-                    {# End regular price #}
-                 </div>
-                 <div class="price-box">
-                    {# Begin pricing #}
-                    <ul class="product">
-                       {# Begin percent off #}
-                       {% if variation.save_price > 1 %}
-                          <li class="pricing">
-                             Save up to {{ prod.saveprice(variation.save_price ) }} {{ prod.savepercent(variation.save_percent) }}
-                          </li>
-                       {% endif %}
-                       {# End percent off #}
-                       {# Begin price per month #}
-                       {% if variation.price >= 100 %}
-                          <li class="pricing">
-                             <span data-tooltip data-toggle="tooltip" data-original-title="Spread payments over six months by selecting &quot;Checkout with Paypal&quot; on the Shopping Cart page. Then log in and apply for a &quot;Bill Me Later&quot; account.">
-                                {{ prod.billmelater(variation.price) }}
-                             </span>
-                          </li>
-                       {% endif %}
-                       {# End price per month #}
-                    </ul>
-                    {# End pricing #}
-                 </div>
-                 <div class="stock">
-                    {% if stock_description == 'In Stock'%}
-                       <h5><span class="sale-label">
-                          {{stock_description}}
-                       </h5></span>
-                    {% else %}
-                       <h5>
-                          Out of stock
-                       </h5>
-                    {% endif %}
-                    <h5>
-                       <i class="glyphicon glyphicon-lock"></i> Secure online ordering
-                    </h5>
-                    {% endif %}
-                 </div>
-              </div>
-              {% endfor %}
-              {% if product.description is not empty %}
-              {% set full_description = product.description %}
-              <div class="product-detail">
-                 <h5>{{full_description}}</h5>
-              </div>
-              {% endif %}
-                             <div class="row grid-20">
-        {% for variation in product.variant %}
-           <div  id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
-              {% if variation.price > 0 %}
-                 <!--/.size-details-->
-                 <form method="post" id="productForm" action="{{ app.url }}/product/route">                      
-                    {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
-                    variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
-                    variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
-                    
-                       {# Begin product Size-Quantity #}
-                       <div class="col-xs-4 col-md-6 no-padding"> {# Begin Row#}
-                          <div class="form-group">
-                             {# Begin product Quantity #}
-                             <div class="input-group col-md-6">
-                                <div class="input-group-btn">
-                                   <button class="btn btn-remove btn-link bootstrap-touchspin-down" type="button"><i class="fa fa-minus"></i></button>
-                                </div>
-                                <input class="form-control quantity-selector quanitySniper" value="1" maxlength="2" placeholder="1" name="items[{{variation.id}}]" type="text">
-                                <div class="input-group-btn">
-                                   <button class="btn btn-add btn-link bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
-                                </div>
-                             </div>
-                          </div>
-                          {# End product quantity #}
-                       </div> {# End Row#}
-                    {% endif %}
-                 </form>
-              {% endif %}
-              {% if variation.sku is not empty %}
-              <div class="col-xs-12 col-md-4"> {# Begin Row#}
-                 <div class="item-sku row no-margin"> 
-                     <strong>Item: </strong> #{{variation.sku}}
-                 </div>
-              </div>
-             {% endif %}
-           </div>
         {% endfor %}
-     </div>
-              
-
-                <div id="variation-selector-{{product.id}}"></div>
-                 <!-- <div class="form-group clearfix">
-                    <label class="control-label">Size</label>
-                    <select class="form-control">
-                       <option value="XS">XS</option>
-                       <option value="S">S</option>
-                       <option value="M">M</option>
-                       <option value="L">L</option>
-                       <option value="XL">XL</option>
-                    </select>
-                 </div>
-                 <div class="form-group clearfix">
-                    <label class="control-label">Color</label>
-                    <select class="form-control">
-                       <option value="Red">Red</option>
-                       <option value="Black">Black</option>
-                       <option value="Pink">Pink</option>
-                       <option value="Navy">Navy</option>
-                       <option value="Yellow">Yellow</option>
-                    </select>
-                 </div>   
-                 <div class="form-group clearfix">
-                    <label class="control-label">Material</label>
-                    <select class="form-control">
-                       <option value="Leather">Leather</option>
-                       <option value="Plastic">Plastic</option>
-                       <option value="Wood">Wood</option>
-                    </select>
-                 </div>       -->
-                 
-                 <!-- {% if product.variant_options %}
-                    <div class="">
-                      {% for option in product.variant_options %}
-                          <div class="" id="variation-selector-{{product.id}}-{{option.name}}">
-                            <button class="" type="button" onclick="dropdown_trigger(this)">Select {{option.name}}</button>
-                            <div class="">
-                              <ul>
-                                {% for value in option.values %}
-                                  <li style="cursor:pointer;" class="" id="variation-selector-{{product.id}}-{{option.name}}-{{value}}">
-                                    {{value}}
-                                  </li class="option-value">
-                                {% endfor %}
-                              </ul>
+        <div class="col-sm-4 ">
+            <h3 class="product-title hidden-xs"><a href="{{app.url}}/brand/{{product.brand|url_encode}}">{{product.brand}}</a></h3>
+            <h2 class="product-title hidden-xs">{{product.title}}</h2>
+            {% for variation in product.variant %}
+                <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
+                    {# Begin Product Prices #}
+                    {% if variation.price > 0 %}
+                        <div class="product-price hidden-xs">
+                            {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                            <span class="product-price">{{ prod.price(variation.price) }}</span>
+                            {# Begin regular price #}
+                            {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
+                                <span class="product-price original-price">{{ prod.price(variation.compare_price) }}</span>
+                            {% endif %}
+                            {# End regular price #}
+                        </div>
+                        <div class="price-box">
+                            {# Begin pricing #}
+                            <ul class="product">
+                                {# Begin percent off #}
+                                {% if variation.save_price > 1 %}
+                                    <li class="pricing">
+                                        Save up to {{ prod.saveprice(variation.save_price ) }} {{ prod.savepercent(variation.save_percent) }}
+                                    </li>
+                                {% endif %}
+                                {# End percent off #}
+                                {# Begin price per month #}
+                                {% if variation.price >= 100 %}
+                                    <li class="pricing">
+                                        <span data-tooltip data-toggle="tooltip" data-original-title="Spread payments over six months by selecting &quot;Checkout with Paypal&quot; on the Shopping Cart page. Then log in and apply for a &quot;Bill Me Later&quot; account.">
+                                            {{ prod.billmelater(variation.price) }}
+                                        </span>
+                                    </li>
+                                {% endif %}
+                                {# End price per month #}
+                            </ul>
+                            {# End pricing #}
+                        </div>
+                        <div class="stock">
+                            {% if stock_description == 'In Stock'%}
+                                <h5><span class="sale-label">
+                                    {{stock_description}}
+                                </h5></span>
+                            {% else %}
+                                <h5>
+                                    Out of stock
+                                </h5>
+                            {% endif %}
+                            <h5>
+                                <i class="glyphicon glyphicon-lock"></i> Secure online ordering
+                            </h5>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% if product.description is not empty %}
+                {% set full_description = product.description %}
+                <div class="product-detail">
+                    <h5>{{full_description}}</h5>
+                </div>
+            {% endif %}
+            <div class="row grid-20">
+                {% for variation in product.variant %}
+                    <div  id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
+                        {% if variation.price > 0 %}
+                            <!--/.size-details-->
+                            <form method="post" id="productForm" action="{{ app.url }}/product/route">                      
+                                {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
+                                    variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
+                                    variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
+                        
+                                    {# Begin product Size-Quantity #}
+                                    <div class="col-xs-4 col-md-6 no-padding"> {# Begin Row#}
+                                    <div class="form-group">
+                                        {# Begin product Quantity #}
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-remove btn-link bootstrap-touchspin-down" type="button"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                            <input class="form-control quantity-selector quanitySniper" value="1" maxlength="2" placeholder="1" name="items[{{variation.id}}]" type="text">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-add btn-link bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# End product quantity #}
+                                    </div> {# End Row#}
+                                {% endif %}
+                            </form>
+                        {% endif %}
+                        {% if variation.sku is not empty %}
+                            <div class="col-xs-12 col-md-4"> {# Begin Row#}
+                                <div class="item-sku row no-margin"> 
+                                    <strong>Item: </strong> #{{variation.sku}}
+                                </div>
                             </div>
-                          </div>
-                        {% endfor %}
+                        {% endif %}
                     </div>
-                 {% endif %}
- -->
+                {% endfor %}
+            </div>
+              
+            <!-- For Variant options dropdowns -->
+            <div id="variation-selector-{{product.id}}"></div>
 
-
-<!--  JUST FOR STYLING  -->
-
-<div class="" id="variation-selector-21-Material">
-  <button class="" type="button" onclick="dropdown_trigger(this)">Select Material</button>
-  <div class="" style="display: block;">
-    <ul>
-        <li style="cursor:pointer;" class="notavailable-selected">
-          Coton
-        </li>
-        <li style="cursor:pointer;" class="notavailable">
-          Gold
-        </li>
-        <li style="cursor:pointer;" class="selected">
-          Leather
-        </li>
-        <li style="cursor:pointer;" class="">
-          Silk
-        </li>
-      </ul>
-  </div>
-</div>
-
-<style type="text/css">
-  .notavailable-selected{
-    text-decoration: line-through;
-    color:red;
-  }
-  .notavailable{
-    text-decoration: line-through;
-  }
-  .selected{
-    color:green;
-  }
-
-</style>
-
-
-              <form  action="product1.html" method="POST" class="myform">
-                 <!-- / Begin Cart-actions -->
-                 <div class="addto">
+            <form  action="product1.html" method="POST" class="myform">
+                <!-- / Begin Cart-actions -->
+                <div class="addto">
                     <div class="col-md-6 product-btn row">
-                       <button type="submit" class="btn" name="action" value="cart">
-                          <i class="icon-left ti ti-shopping-cart"></i>
-                          <span>Add to Cart</span>
-                       </button> 
+                        <button type="submit" class="btn" name="action" value="cart">
+                            <i class="icon-left ti ti-shopping-cart"></i>
+                            <span>Add to Cart</span>
+                        </button> 
                     </div>
-                    <!--/.End cart-actions-->
-                 </div>   
-              </form>
-
-
-           </div>
+                </div>   
+                <!--/.End cart-actions-->
+            </form>
         </div>
-     </div>
-     <div class="row">
-        <div class="col-sm-8 ">
-           <div class="paging clearfix">
-              <a class="btn btn-outline pull-left" href="product2.html"><i class="glyphicon glyphicon-chevron-left"></i><span>Previous</span><span class="hidden-xs"> Product</span></a>
-           </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8 ">
+        <div class="paging clearfix">
+            <a class="btn btn-outline pull-left" href="product2.html"><i class="glyphicon glyphicon-chevron-left"></i><span>Previous</span><span class="hidden-xs"> Product</span></a>
         </div>
-     </div>
-     </div>
+    </div>
 </div>

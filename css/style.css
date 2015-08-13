@@ -1592,6 +1592,7 @@ legend{
     -ms-user-select: none;
     user-select: none;
     text-transform: none;
+    margin-top: 20px;
 }
 
 .dropdown.dropdown--open .dropdown-trigger {

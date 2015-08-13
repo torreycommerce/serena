@@ -196,21 +196,25 @@ function VariantsManager (variants, variant_options, isCollection) {
             //Color styling
             if( selectName.toLowerCase() == "color"){
                 if(self.isCollection){
-                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: ""}); 
+                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"}); 
                 }else{
-                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: ""});
+                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});
                 }
      
                 var ul = $('<ul>', {class: ""});  
-                var button = $('<button>', {class: "", onclick: "dropdown_trigger(this)"}).append(
-                                $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
+                var button = $('<button>', {    class: "dropdown-trigger", 
+                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
+                                            }).append(
+                                                $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
                             ); 
 
             }else{//size (default) styling
-                var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: ""});           
+                var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});           
                 var ul = $('<ul>', {class: ""});  
-                var button = $('<button>', {class: "", onclick: "dropdown_trigger(this)"}).append(
-                                $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
+                var button = $('<button>', {    class: "dropdown-trigger", 
+                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
+                                            }).append(
+                                $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ")
                             );
             }
 
@@ -220,7 +224,8 @@ function VariantsManager (variants, variant_options, isCollection) {
                                 class: "",
                                 "data-tooltip": "",
                                 "data-toggle": "tooltip",
-                                "title": self.outOfStock
+                                "title": self.outOfStock,
+                                onclick: "dropdown_trigger("+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
                     })
                     // .append(
                     //         self.getATag(selectName, optionValue)
@@ -232,9 +237,11 @@ function VariantsManager (variants, variant_options, isCollection) {
                 );
             });
 
-            var content = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName+"-content", name: selectName, class: ""});
+            var content = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName+"-content", name: selectName, class: "dropdown-content"});
             content.append(ul);
 
+            var span_selected = $('<span>', {class: "", id: "selected-"+selectName+"-"+self.product_id}).text("");
+            button.append(span_selected);
             div.append(button);
             div.append(content);
 
@@ -305,8 +312,18 @@ function VariantsManager (variants, variant_options, isCollection) {
     }
 }
 
-function dropdown_trigger(element){
-    var selector = "#"+$(element).parent().attr("id")+"-content";
+/*
+ * Dropdown for variant options management
+ */
+
+$(document).click(function() {
+    // all dropdowns content
+    $('.dropdown-content').hide();
+});
+
+function dropdown_trigger(event, dropdown_content_id){
+    event.stopPropagation();
+    var selector = "#"+dropdown_content_id;
     var elem = $(selector);
     if(elem.is(":visible"))
         elem.hide();
