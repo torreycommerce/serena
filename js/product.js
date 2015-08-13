@@ -327,6 +327,8 @@ function dropdown_trigger(event, dropdown_content_id){
     var elem = $(selector);
     if(elem.is(":visible"))
         elem.hide();
-    else
+    else{
+        $('.dropdown-content').hide();
         elem.show();
+    }
 }
