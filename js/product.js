@@ -226,7 +226,7 @@ function VariantsManager (variants, variant_options, isCollection) {
                                 "data-toggle": "tooltip",
                                 "data-placement":"top",
                                 "title": self.outOfStock,
-                                onclick: "dropdown_trigger("+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
+                                onclick: "dropdown_trigger("+"'variation-selector-"+self.product_id+"-"+selectName+"')"
                     })
                     // .append(
                     //         self.getATag(selectName, optionValue)
@@ -319,7 +319,7 @@ function VariantsManager (variants, variant_options, isCollection) {
 
 $(document).click(function() {
     // all dropdowns content
-    $('.dropdown-content').slideUp();
+    $('.dropdown').removeClass("dropdown-open");
 });
 
 function dropdown_trigger(event, dropdown_content_id){
