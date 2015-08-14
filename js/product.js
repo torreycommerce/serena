@@ -203,7 +203,7 @@ function VariantsManager (variants, variant_options, isCollection) {
      
                 var ul = $('<ul>', {class: ""});  
                 var button = $('<div>', {    class: "dropdown-trigger", 
-                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
+                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"')"
                                             }).append(
                                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
                             ); 
@@ -212,7 +212,7 @@ function VariantsManager (variants, variant_options, isCollection) {
                 var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});           
                 var ul = $('<ul>', {class: ""});  
                 var button = $('<div>', {    class: "dropdown-trigger", 
-                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
+                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"')"
                                             }).append(
                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ")
                             );
@@ -224,6 +224,7 @@ function VariantsManager (variants, variant_options, isCollection) {
                                 class: "",
                                 "data-tooltip": "",
                                 "data-toggle": "tooltip",
+                                "data-placement":"top",
                                 "title": self.outOfStock,
                                 onclick: "dropdown_trigger("+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
                     })
@@ -325,12 +326,9 @@ function dropdown_trigger(event, dropdown_content_id){
     event.stopPropagation();
     var selector = "#"+dropdown_content_id;
     var elem = $(selector);
-    if(elem.is(":visible"))
-        // elem.hide(200);
-        elem.slideUp(200);
-    else{
-        $('.dropdown-content').hide();
-        // elem.show(200);
-        elem.slideDown(200);
+    if(elem.hasClass("dropdown-open")){
+        elem.removeClass("dropdown-open");
+    }else{
+        elem.toggleClass("dropdown-open");
     }
 }
