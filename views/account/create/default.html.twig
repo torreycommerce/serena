@@ -44,7 +44,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.email('create[email]',create.email, {class:'form-control parsley-validated', placeholder:"Email", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-5 col-md-offset-0 col-lg-5">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'email') }}</div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.email('create[confirm_email]',create.confirm_email, {class:'form-control parsley-validated', placeholder:"Retype Email", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-5 col-md-offset-0 col-lg-5">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'confirm_email') }}</div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.password('create[password]',create.password, {class:'form-control parsley-validated', placeholder:"Password", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-0 col-lg-6">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'password') }}</div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.password('create[confirm_password]',create.confirm_password, {class:'form-control parsley-validated', placeholder:"Retype Password", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-0 col-lg-6">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'confirm_password') }}</div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.text('create[first_name]',create.first_name, {class:'form-control parsley-validated', placeholder:"First Name", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-0 col-lg-6">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'first_name') }}</div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.text('create[last_name]',create.last_name, {class:'form-control parsley-validated', placeholder:"Last Name", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-0 col-lg-6">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'last_name') }}</div>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 <div class="col-sm-12">
                                     {{ forms.phone('create[phone_number]',create.phone_number, {class:'form-control parsley-validated', placeholder:"Phone Number", required:true}) }}
                                 </div>
-                                <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-0 col-lg-8">
+                                <div class="col-sm-12">
                                     <div class="validation">{{ forms.errorlist(form_errors, 'phone_number') }}</div>
                                 </div>
                             </div>

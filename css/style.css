@@ -922,16 +922,14 @@ ul.nav-list li a {
   text-transform: uppercase;
 }
 a.nav-brand {
-  border: 2px solid #000;
+  border: none;
   /* padding: 4px; */
-  width: auto;
   font-size: 38px;
   display: block;
   margin: 0 auto;
   text-align: center;
-  width: 200px;
   font-weight: 300;
-  line-height: 46px;
+  line-height: 48px;
   cursor: pointer;
   color: #000;
   -ms-transition: all 0.3s ease-out;
@@ -944,10 +942,8 @@ a.nav-brand span {
   font-weight: 700;
 }
 a.nav-brand:hover {
-  background-color: #000;
-  color: #FFF;
+  opacity: .5;
   text-decoration: none;
-  padding: 0px 10px;
 }
 
 .brand-logo {
@@ -1316,7 +1312,6 @@ blockquote footer, blockquote small, blockquote .small {
     float: left;
     width: auto;
     font-size: 28px;
-  
     letter-spacing: -1px;
     border: 0;
 }
@@ -1620,6 +1615,12 @@ legend{
   float: left;
 }
 
+.product-details ul.product li.pricing{
+  list-style-type: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* PRODUCTS FILTER
 ---------------------------------------------------------- */
 .products-filter {
@@ -1744,6 +1745,12 @@ legend{
 
 }
 
+.dropdown .dropdown-content li:hover {
+    background-color: #EBEBEB;
+    color: white;
+
+}
+
 .dropdown .selected {
     background-color: #67C4B0;
     color: white;
@@ -1752,11 +1759,13 @@ legend{
 .dropdown .notavailable-selected {
     background-color: #888;
     color: #e5e5e5;
-    cursor: default;
+    cursor: not-allowed;
+    text-decoration-line: overline;
 }
 .dropdown .notavailable {
     color: #e5e5e5;
-    cursor: default;
+    cursor: not-allowed;
+    text-decoration-line: overline;
 }
 
 .dropdown-content ul {
