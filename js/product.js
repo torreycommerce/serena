@@ -202,7 +202,7 @@ function VariantsManager (variants, variant_options, isCollection) {
                 }
      
                 var ul = $('<ul>', {class: ""});  
-                var button = $('<button>', {    class: "dropdown-trigger", 
+                var button = $('<div>', {    class: "dropdown-trigger", 
                                                 onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
                                             }).append(
                                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
@@ -211,7 +211,7 @@ function VariantsManager (variants, variant_options, isCollection) {
             }else{//size (default) styling
                 var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});           
                 var ul = $('<ul>', {class: ""});  
-                var button = $('<button>', {    class: "dropdown-trigger", 
+                var button = $('<div>', {    class: "dropdown-trigger", 
                                                 onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"-content'"+")"
                                             }).append(
                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ")
