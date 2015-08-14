@@ -243,6 +243,10 @@ function VariantsManager (variants, variant_options, isCollection) {
 
             var span_selected = $('<span>', {class: "", id: "selected-"+selectName+"-"+self.product_id}).text("");
             button.append(span_selected);
+            var i = $('<i>', {class: "fa fa-caret-up pull-right"});
+            button.append(i);
+            i = $('<i>', {class: "fa fa-caret-down pull-right"});
+            button.append(i);
             div.append(button);
             div.append(content);
 

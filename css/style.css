@@ -1718,12 +1718,12 @@ legend{
     margin-top: 20px;
 }
 
-.dropdown.dropdown--open .dropdown-trigger {
+.dropdown.dropdown-open .dropdown-trigger {
     color: #c9c9c9;
     border-bottom: 1px solid transparent;
 }
 
-.dropdown.dropdown--open .dropdown-content {
+.dropdown.dropdown-open .dropdown-content {
     display: block;
 }
 
@@ -1786,6 +1786,17 @@ legend{
     cursor: pointer;
 
 }
+
+.dropdown-open .fa-caret-up{
+  display:none;
+} 
+.dropdown .fa-caret-down{
+  display:none;
+}
+.dropdown-open .fa-caret-down{
+  display:block !important;
+}
+
 
 /* End Dropdown Variations */
 
