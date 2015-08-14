@@ -318,7 +318,7 @@ function VariantsManager (variants, variant_options, isCollection) {
 
 $(document).click(function() {
     // all dropdowns content
-    $('.dropdown-content').hide();
+    $('.dropdown-content').slideUp();
 });
 
 function dropdown_trigger(event, dropdown_content_id){
@@ -326,9 +326,11 @@ function dropdown_trigger(event, dropdown_content_id){
     var selector = "#"+dropdown_content_id;
     var elem = $(selector);
     if(elem.is(":visible"))
-        elem.hide();
+        // elem.hide(200);
+        elem.slideUp(200);
     else{
         $('.dropdown-content').hide();
-        elem.show();
+        // elem.show(200);
+        elem.slideDown(200);
     }
 }
