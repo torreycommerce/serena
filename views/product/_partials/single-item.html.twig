@@ -189,7 +189,7 @@
                         {% endif %}
                         {% if variation.sku is not empty %}
                             <div class="col-xs-12 col-md-4"> {# Begin Row#}
-                                <div class="item-sku row no-margin"> 
+                                <div class="item-sku"> 
                                     <strong>Item: </strong> #{{variation.sku}}
                                 </div>
                             </div>
@@ -201,18 +201,19 @@
             <!-- For Variant options dropdowns -->
             <div id="variation-selector-{{product.id}}"></div>
 
-            <form  action="product1.html" method="POST" class="myform">
                 <!-- / Begin Cart-actions -->
-                <div class="addto">
-                    <div class="col-md-6 product-btn row">
-                        <button type="submit" class="btn" name="action" value="cart">
+                <div class="addto row">
+                  <form method="post" id="productForm" action="{{ app.url }}/product/route" class="form-inline">
+                     {% include "/product/_partials/list/actions-single.html.twig" %}
+                  </form>
+                    <div class="col-md-6 col-xs-12 product-btn pull-right">
+                        <button type="submit" class="btn btn-block" name="action" value="cart">
                             <i class="icon-left ti ti-shopping-cart"></i>
                             <span>Add to Cart</span>
                         </button> 
                     </div>
                 </div>   
                 <!--/.End cart-actions-->
-            </form>
         </div>
     </div>
 </div>

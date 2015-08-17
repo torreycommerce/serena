@@ -177,17 +177,17 @@
                 {# End registry #}
             </div> <!-- / End Whishlist if there is wishlist or registry-->
             {% endif %}
-            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2"> <!-- Product Quantity-->
-                <div class="quantity">
-                    <div class="quantity-input-group">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-remove bootstrap-touchspin-down"><i class="fa fa-minus"></i></button>
-                            </div>
-                            <input type="text" class="form-control quantity-selector quanitySniper" data-id="{{id}}" data-model="sessioncartitem" name="cart[quantity][{{ id }}]" value="{{ item.quantity }}">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-add bootstrap-touchspin-up"><i class="fa fa-plus"></i></button>
-                            </div>
+            <div class="col-xs-2 col-xs-1 col-sm-3 col-sm-0 col-md-2 col-md-offset-0 col-lg-2"> <!-- Product Quantity-->
+                <div class="quantity-input-group quantity product">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-remove bootstrap-touchspin-down" type="button">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control quantity-selector quanitySniper" data-id="{{id}}" data-model="sessioncartitem" name="cart[quantity][{{ id }}]" value="{{ item.quantity }}">
+                        <div class="input-group-btn">
+                            <button class="btn btn-add bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>

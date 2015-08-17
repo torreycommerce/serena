@@ -433,6 +433,10 @@ ul.reviews li.submit {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.btn-toolbar {
+  margin-left: 0 !important;
+}
 /* ------------------------------ product list -------------------------- */
 .productlist a .product-price {
   -webkit-transition:all .3s ease-out;
@@ -1570,7 +1574,7 @@ legend{
 
 .product .btn {
   text-transform: uppercase;
-  margin: 10px 5px;
+  margin: 10px 0;
   padding: 0 13px;
   line-height: 35px;
   height: auto;
