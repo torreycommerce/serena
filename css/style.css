@@ -528,7 +528,7 @@ a:hover .product-price {
   right: 22px;
 }
 
-.label-new, .label-sale, .label-hot, .label-feat{
+.label-new, .label-sale, .sold-out, .label-hot, .label-feat{
   color: #67C4B0;
   font-weight: 400;
   text-transform: uppercase;
@@ -536,10 +536,17 @@ a:hover .product-price {
   border: 2px solid #67C4B0;
 }
 .label-sale {
+  color: tomato;
+  border-color: tomato;
+  background: none;
+}
+
+.sold-out {
   color: #000;
   border-color: #000;
   background: none;
 }
+
 .show-more {
   margin-top: 30px;
 }

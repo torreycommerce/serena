@@ -9,6 +9,8 @@
                 <span class="label-sale">{{ tag|capitalize }}</span> 
             {% elseif tag == 'popular' %}
                 <span class="label-hot">{{ tag|capitalize }}</span> 
+            {% elseif tag == 'sold-out' %}
+                <span class="sold-out">{{ tag|capitalize }}</span> 
             {% else %}
                 <span class="label-feat">{{ tag|capitalize }}</span> 
             {% endif %}
