@@ -789,7 +789,8 @@ address {
 /* ------------------------------ skin checkbox -------------------------- */
 input[type="radio"],
 input[type="checkbox"] {
-  display:none;
+  line-height: 1;
+  margin: 5px 0 0;
 }
 
 input[type="radio"] + span:before,

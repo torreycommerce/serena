@@ -252,7 +252,7 @@
 
                   {% if variant_images is empty %}
                     {% set variant_images = product.images %}
-                    {% set image_url = app.image.getImageUrl('product','thumbnail', variant_images[0].id) %}
+                    {% set image_url = app.image.getImageUrl('product','serena', variant_images[0].id) %}
                 {% endif %}
             {% endif %}
           </div> <!-- / End Products Category -->
@@ -261,7 +261,7 @@
             <div class="product clearfix"> <!-- Begin product -->
             <!-- / Begin Image -->
               <div class="image"> 
-                <a href="{{ app.url }}/product/{{ product.slug }}"><img onerror="this.src='{{ app.url_asset }}/images/product/image-900x900.jpg'" src="{{ image_url }}" alt="img" class="img-responsive"></a>
+                <a href="{{ app.url }}/product/{{ product.slug }}"><img onerror="this.src='{{ app.url_asset }}/images/product/image-800x530.jpg'" src="{{ image_url }}" alt="img" class="img-responsive"></a>
               </div>
               <!-- / End Image -->
               <div class="label">
