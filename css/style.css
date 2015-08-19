@@ -659,6 +659,13 @@ a:hover .product-price, a:hover .product-price-category{
 .stock h5{
   padding: 5px 0;
 }
+
+.product-panel-heading {
+  border-color: #000 !important;
+  margin-top: 40px;
+  border-bottom: none !important;
+
+}
 /* ------------------------------ myform -------------------------- */
 
 
