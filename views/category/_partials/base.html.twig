@@ -259,38 +259,46 @@
           {# Begin product #}
           <div class="col-sm-6">
             <div class="product clearfix"> <!-- Begin product -->
-            <!-- / Begin Image -->
+            <!-- / Begin Image and Details -->
               <div class="image"> 
-                <a href="{{ app.url }}/product/{{ product.slug }}"><img onerror="this.src='{{ app.url_asset }}/images/product/image-800x530.jpg'" src="{{ image_url }}" alt="img" class="img-responsive"></a>
-              </div>
-              <!-- / End Image -->
-              <div class="label">
-                {% for tag in product.tags %}
-                    {% if tag == 'new' %}
-                        <span class="label-new">{{ tag|capitalize }}</span> 
-                    {% elseif tag == 'sale' %}
-                        <span class="label-sale">{{ tag|capitalize }}</span> 
-                    {% elseif tag == 'popular' %}
-                        <span class="label-hot">{{ tag|capitalize }}</span> 
-                    {% else %}
-                        <span class="label-feat">{{ tag|capitalize }}</span> 
-                    {% endif %}
-                {% endfor %}
-              </div>
-              <div class="details"> <!-- Begin Details -->
-                <div class="product-title text-center">
-                  <a class="title" href="{{ app.url }}/product/{{ product.slug }}">{{ product.title }} </a>
+                <a href="{{ app.url }}/product/{{ product.slug }}"><img onerror="this.src='{{ app.url_asset }}/images/product/image-800x530.jpg'" src="{{ image_url }}" alt="img" class="img-responsive">    
+                <span class="productlist-price-container">
+                    <span class="product-price-category">
+                        <span>
+                            {% if product.attributes.price %}
+                                {{ prod.price(product.attributes.price) }}
+                            {% endif %}
+                        </span>
+                        {% if product.attributes.compare_price[0] is not empty and product.attributes.compare_price != product.attributes.price %}
+                            <span class="original-price">
+                                <span>
+                                    {{ prod.price(product.attributes.compare_price) }}
+                                </span>
+                            </span>
+                        {% endif %}
+                    </span>
+                </span>
+                <div class="productlist-title-container">
+                  <a class="title-category" href="{{ app.url }}/product/{{ product.slug }}">{{ product.title }} </a>
                 </div>
-                <div class="price-box text-center"> <!-- Begin Price Box -->
-                  <span class="price">{% if product.attributes.price %}
-                  {{ prod.price(product.attributes.price) }} {% if product.attributes.compare_price[0] is not empty and product.attributes.compare_price != product.attributes.price %}</span><span class="price price-old">{{ prod.price(product.attributes.compare_price) }}</span>
-                  {% endif %}
-                  {% endif %}
-                </div> <!-- / End Price Box -->
-                <div class="btn-group btn-block"> <!-- Begin Buttons -->
-                  <a class="btn btn-outline btn-block" href="{{ app.url }}/product/{{ product.slug }}">See Product</a>  
-                </div>  <!-- /End Buttons -->
-              </div> <!-- /End Details -->
+                </a>
+              </div>
+              <!-- / End Image and Details -->
+              <div class="productlist-label">
+                  {% for tag in product.tags %}
+                      {% if tag == 'new' %}
+                          <span class="label-new">{{ tag|capitalize }}</span> <!-- class new-label to create ... -->
+                      {% elseif tag == 'sale' %}
+                          <span class="label-sale">{{ tag|capitalize }}</span> 
+                      {% elseif tag == 'popular' %}
+                          <span class="label-hot">{{ tag|capitalize }}</span> 
+                      {% elseif tag == 'sold-out' %}
+                          <span class="sold-out">{{ tag|capitalize }}</span> 
+                      {% else %}
+                          <span class="label-feat">{{ tag|capitalize }}</span> 
+                      {% endif %}
+                  {% endfor %}
+              </div>
             </div>  <!-- / End Begin product -->
             {% endfor %}
           </div> <!-- / End Col-6 -->

@@ -449,6 +449,13 @@ ul.reviews li.submit {
   /*border: 2px solid #000;*/
 } 
 
+a .product-price-category {
+  -webkit-transition:all .3s ease-out;
+  -moz-transition:all .3s ease-out;
+  transition:all .3s ease-out;
+  color: #000;
+}
+
 .productlist, .product {
   padding-top: 0;
   padding-bottom: 50px;
@@ -489,6 +496,32 @@ ul.reviews li.submit {
   margin: 22px;
 }
 
+a.title-category {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  padding: .7em 1.1em;
+  font-family: "Helvetica Neue","Arial","sans-serif";
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1.3em;
+}
+
+.productlist-title-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-width: 50%;
+  text-align: left;
+  z-index: 89;
+  margin: 22px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
 .productlist-love-container {
   position: absolute;
   bottom: 0;
@@ -501,7 +534,7 @@ ul.reviews li.submit {
   line-height: 20px;
 }
 
-.product-price {
+.product-price, .product-price-category {
   background-color: #fff;
   display: inline-block;
   padding: .7em 1.1em;
@@ -518,10 +551,17 @@ ul.reviews li.submit {
   text-decoration: line-through;
   margin-left: .5em;
 }
-a:hover .product-price {
+
+.product-price-category .original-price {
+  text-decoration: line-through;
+  margin-left: .5em;
+}
+
+a:hover .product-price, a:hover .product-price-category{
   background-color: #000;
   color: #FFF;
 }
+
 .productlist-label {
   position: absolute;
   top: 26px;
@@ -535,6 +575,7 @@ a:hover .product-price {
   padding: 3px 9px;
   border: 2px solid #67C4B0;
 }
+
 .label-sale {
   color: tomato;
   border-color: tomato;
@@ -557,6 +598,10 @@ a:hover .product-price {
 
 .item .thumbnail {
   border:none;
+}
+
+.panel-default > .panel-heading {
+  background: none;
 }
 /* ------------------------------ product detail -------------------------- */
 
@@ -1345,6 +1390,7 @@ blockquote footer, blockquote small, blockquote .small {
   }*/
   
   /* center MT */
+
   footer, .product-btn, .product-colors,
   .title, .contact {
     text-align: center;
@@ -1915,9 +1961,9 @@ legend{
 }
 
 .btn-primary {
-  background-color: #67C4B0;
+  background-color: #000;
   color: #fff;
-  border-color: #67C4B0;
+  border-color: #000;
   margin-right: 0! important;
 }
 .btn-primary:hover {
