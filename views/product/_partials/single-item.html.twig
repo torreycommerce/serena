@@ -201,52 +201,53 @@
             <!-- For Variant options dropdowns -->
             <div id="variation-selector-{{product.id}}"></div>
 
-                <!-- / Begin Cart-actions -->
-                <div class="addto row">
-                  <form method="post" id="productForm" action="{{ app.url }}/product/route" class="form-inline">
-                     {% include "/product/_partials/list/actions-single.html.twig" %}
-                  </form>
-                    <div class="col-md-6 col-xs-12 product-btn pull-right">
-                        <button type="submit" class="btn btn-block" name="action" value="cart">
-                            <i class="icon-left ti ti-shopping-cart"></i>
-                            <span>Add to Cart</span>
-                        </button> 
-                    </div>
-                </div>   
-                <!--/.End cart-actions-->
-            </div>
-                <div class="col-xs-12">
-                          <!-- Accordion -->
-                  <div class="panel-group" id="accordion">
-                     <!-- Panel -->
-                     <div class="panel panel-default">
-                        <!-- Heading -->
-                        <div class="panel-heading product-panel-heading">
-                           <h4 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                 Product Reviews
-                              </a>
-                           </h4>
-                        </div>
-                        <!-- /Heading -->
-                        <!-- Collapse -->
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                           <div class="panel-body">
-                              {% include "/product/_partials/reviews.html.twig" %}
-                           </div>
-                        </div>
-                      <!-- /Collapse -->
-                     </div>
-                     <!-- /Panel -->
-                  </div>
-                  <!-- /End Accordion -->
-                  </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-8 ">
-        <div class="paging clearfix">
-            <a class="btn btn-outline pull-left" href="product2.html"><i class="glyphicon glyphicon-chevron-left"></i><span>Previous</span><span class="hidden-xs"> Product</span></a>
+            <!-- / Begin Cart-actions -->
+            <div class="addto row">
+              <form method="post" id="productForm" action="{{ app.url }}/product/route" class="form-inline">
+                 {% include "/product/_partials/list/actions-single.html.twig" %}
+              </form>
+                <div class="col-md-6 col-xs-12 product-btn pull-right">
+                    <button type="submit" class="btn btn-block" name="action" value="cart">
+                        <i class="icon-left ti ti-shopping-cart"></i>
+                        <span>Add to Cart</span>
+                    </button> 
+                </div>
+            </div>   
+            <!--/.End cart-actions-->
+        </div>
+        {#<div class="col-xs-12">
+                  <!-- Accordion -->
+          <div class="panel-group" id="accordion">
+             <!-- Panel -->
+             <div class="panel panel-default">
+                <!-- Heading -->
+                <div class="panel-heading product-panel-heading">
+                   <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                         Product Reviews
+                      </a>
+                   </h4>
+                </div>
+                <!-- /Heading -->
+                <!-- Collapse -->
+                <div id="collapseTwo" class="panel-collapse collapse">
+                   <div class="panel-body">
+                      {% include "/product/_partials/reviews.html.twig" %}
+                   </div>
+                </div>
+              <!-- /Collapse -->
+             </div>
+             <!-- /Panel -->
+          </div>
+          <!-- /End Accordion -->
+          </div>#}
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-sm-8 ">
+            <div class="paging clearfix">
+                <a class="btn btn-outline pull-left" href="product2.html"><i class="glyphicon glyphicon-chevron-left"></i><span>Previous</span><span class="hidden-xs"> Product</span></a>
+                <a class="btn btn-outline pull-right" href="product1.html"><span>Next</span><span class="hidden-xs"> Product</span><i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>

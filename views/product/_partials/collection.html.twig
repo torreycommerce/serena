@@ -99,7 +99,7 @@
             <h3 class="product-title hidden-xs"><a href="{{app.url}}/brand/{{product.brand|url_encode}}">{{product.brand}}</a></h3>
             <h2 class="product-title hidden-xs">{{product.title}}</h2>
             {# Begin review stars #}
-            {% set review_score = product.product|values_in('review_score')|merge( product.review_score ? [product.review_score] : [])|average() %}
+            {% set review_score = product.product|values_in('review_score')|merge( product.review_score ? [product.review_score] : [])|average() %}{#
             <div class="row">
                 <div class="col-md-12">
                     <ul class="reviews">
@@ -116,7 +116,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>#}
             {# End review stars #}
             {# Begin product prices #}
                     {% set prices =  product.product|values_in('variant')|values_in(['price','compare_price','save_price','save_percent']) %}
@@ -226,9 +226,9 @@
                                 <a href="#details" data-toggle="tab">Description</a>
                             </li>
                             {% endif %}
-                            <li>
+<!--                             <li>
                                 <a href="#reviews" data-toggle="tab">Reviews</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -506,13 +506,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="reviews" class="tab-pane fade">
+                        {#<div id="reviews" class="tab-pane fade">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     {% include "/product/_partials/reviews.html.twig" %}
                                 </div>
                             </div>
-                        </div>
+                        </div>#}
                     </div>
                 </div>
             </div>
