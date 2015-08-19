@@ -122,11 +122,19 @@ set in the array in /account/_macros/base.html.twig
                                             </span>
                                         </li>
                                         <li>
-                                            {{ forms.submit('address[action]', 'primary/' ~  (row + 1), '<i class="fa fa-star"></i>
-                                                <span class="text"> Use as primary address</span>', {class:'btn btn-outline btn-link'})}}
+                                            <span class="text">
+                                                <a href="{{ app.url }}/account/addresses/{{ row + 1 }}/primary" class="btn btn-outline btn-link" name="edit_address">
+                                                    <i class="fa fa-star"></i>
+                                                    <span class="text"> Use as primary address</span>
+                                                </a>
+                                            </span>
                                         </li>
                                         <li>
-                                            {{ forms.submit('address[action]', 'delete/'  ~  (row + 1), '<i class="fa fa-times"></i> <span class="text"> Delete</span>', {class:'btn btn-outline btn-link'})}}
+                                            <span class="text">
+                                                <a href="{{ app.url }}/account/addresses/{{ row + 1 }}/delete" class="btn btn-outline btn-link" name="edit_address">
+                                                    <i class="fa fa-times"></i> <span class="text"> Delete</span>
+                                                </a>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
