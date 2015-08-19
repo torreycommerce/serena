@@ -197,15 +197,31 @@
                     </div>
                 {% endfor %}
             </div>
-              
+            {# Begin actions desktop #}
+            {% if app.user.id is not empty %}
+                {% set registries = api.get('/registry', {query:{customer_id:app.user.id}}) %}
+                {% if registries is not empty %}
+                    {% set registry_ids = [] %}
+                    {% for registry in registries %}
+                        {% set registry_ids = registry_ids|merge([registry.id]) %}
+                    {% endfor %}
+                    {% set items_in_registry = api.get('/registryitem', {query:{registry_id:{'$in':registry_ids},product_id:product.id}}) %}
+                {% endif %}
+                {% set wishlists = api.get('/wishlist', {query:{customer_id:app.user.id}}) %}
+                {% if wishlists is not empty %}
+                    {% set wishlist_ids = [] %}
+                    {% for wishlist in wishlists %}
+                        {% set wishlist_ids = wishlist_ids|merge([wishlist.id]) %}
+                    {% endfor %}
+                    {% set items_in_wishlist = api.get('/wishlistitem', {query:{wishlist_id:{'$in':wishlist_ids},product_id:product.id}}) %}
+                {% endif %}
+            {% endif %}
             <!-- For Variant options dropdowns -->
             <div id="variation-selector-{{product.id}}"></div>
 
                 <!-- / Begin Cart-actions -->
                 <div class="addto row">
-                  <form method="post" id="productForm" action="{{ app.url }}/product/route" class="form-inline">
-                     {% include "/product/_partials/list/actions-single.html.twig" %}
-                  </form>
+                    {% include "/product/_partials/list/actions-single.html.twig" %}
                     <div class="col-md-6 col-xs-12 product-btn pull-right">
                         <button type="submit" class="btn btn-block" name="action" value="cart">
                             <i class="icon-left ti ti-shopping-cart"></i>
