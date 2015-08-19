@@ -114,8 +114,14 @@
                                 {% else %}
                                     <div id="logo-txt"><a class="nav-brand" href="{{app.url}}/">{{ app.params.site.title|striptags|slice(0, 32) }}</a></div>
                                 {% endif %}
-                                <a class="nav-icon pull-right visible-xs menu-link" href="#nav-mobile-main"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
-                                <a class="nav-icon-outline cart pull-right" href="cart.html"><i class="glyphicon glyphicon-shopping-cart"></i><span class="badge">3</span></a>
+                                {% set cart = api.get('/sessioncart') %}
+                                <a class="nav-icon pull-right visible-xs menu-link" href="#nav-mobile-main">
+                                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                                </a>
+                                <a class="nav-icon-outline cart pull-right" href="{{ app.url }}/cart">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                                    <span class="badge">{{ cart.item_count }}</span>
+                                </a>
                         </div>
                     </div>
                 </div>  
@@ -136,7 +142,7 @@
             {% endblock %}
             {% block js %}{% endblock %}
                 {# Begin Footer #}
-            <footer class="footer">
+            <footer id="footer">
                     {% block footer %}
                         {% include "/_layouts/main/footer.html.twig"%}
                     {% endblock %}
