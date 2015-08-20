@@ -111,7 +111,7 @@
             </div>
         </div> <!--/ End Product Thumbnail-->
 
-        <div class="details col-xs-8 col-sm-6 col-md-10 col-lg-10"> <!-- Product Description Part-->
+        <div class="details col-xs-8 col-sm-6 col-md-10 col-lg-10 text-left"> <!-- Product Description Part-->
             <div class="col-md-4 col-lg-4"> <!-- Product Title-->
                 <div class="name">
                     <h6><a href="{{ app.url ~ product.url }}">{{ product.title }}</a></h6>
@@ -134,24 +134,24 @@
                     <div class="regular">
                         {% if product.compare_price is not empty and product.compare_price > product.price %}
                         <strike>
-                            <div class="item-label">Reg:</div>
-                            <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.compare_price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.compare_price|number_format(2)|split('.')|last }}</span></span>
+                            <div class="item-label">Reg:
+                            <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.compare_price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.compare_price|number_format(2)|split('.')|last }}</span></span></div>
                         </strike>
                         {% else %}
-                        <div class="item-label">Price:</div>
-                        <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.price|number_format(2)|split('.')|last }}</span></span>
+                        <div class="item-label">Price:
+                        <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.price|number_format(2)|split('.')|last }}</span></span></div>
                         {% endif %}
                     </div>
                     {% if product.compare_price is not empty and product.compare_price > product.price %}
                     <div class="sale">
-                        <div class="item-label">Sale:</div>
-                        <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.price|number_format(2)|split('.')|last }}</span></span>
+                        <div class="item-label">Sale:
+                        <span class="dollar-sign">$</span><span class="amount"><span class="dollars">{{ product.price|number_format(2)|split('.')|first }}</span>.<span class="cents">{{ product.price|number_format(2)|split('.')|last }}</span></span></div>
                     </div>
                     {% endif %}
                     <div class="price">
                         {% set price = product.price * item.quantity %}
-                        <div class="item-label"><strong>Total:</strong></div>
-                        <span class="dollar-sign float-left">$</span><span class="amount"><span class="dollars">{{ price|number_format(2)|split('.')|first }}.{{ price|number_format(2)|split('.')|last }}</span></span>
+                        <div class="item-label"><strong>Total:</strong>
+                        <span class="dollar-sign float-left">$</span><span class="amount"><span class="dollars">{{ price|number_format(2)|split('.')|first }}.{{ price|number_format(2)|split('.')|last }}</span></span></div>
                     </div>
                     <div class="error alert alert-danger" style="display:none">
                     </div>
