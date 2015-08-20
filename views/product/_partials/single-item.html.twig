@@ -158,34 +158,34 @@
                     <h5>{{full_description}}</h5>
                 </div>
             {% endif %}
+
+            <form method="post" id="productForm" action="{{ app.url }}/product/route">                      
             <div class="row grid-20">
                 {% for variation in product.variant %}
                     <div  id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
                         {% if variation.price > 0 %}
                             <!--/.size-details-->
-                            <form method="post" id="productForm" action="{{ app.url }}/product/route">                      
-                                {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
-                                    variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
-                                    variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
-                        
-                                    {# Begin product Size-Quantity #}
-                                    <div class="col-xs-2 col-md-6 no-padding"> {# Begin Row#}
-                                    <div class="form-group">
-                                        {# Begin product Quantity #}
-                                        <div class="input-group col-md-6">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-remove btn-link bootstrap-touchspin-down" type="button"><i class="fa fa-minus"></i></button>
-                                            </div>
-                                            <input class="form-control quantity-selector quanitySniper" value="1" maxlength="2" placeholder="1" name="items[{{variation.id}}]" type="text">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-add btn-link bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
-                                            </div>
+                            {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
+                                variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
+                                variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
+                    
+                                {# Begin product Size-Quantity #}
+                                <div class="col-xs-2 col-md-6 no-padding"> {# Begin Row#}
+                                <div class="form-group">
+                                    {# Begin product Quantity #}
+                                    <div class="input-group col-md-6">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-remove btn-link bootstrap-touchspin-down" type="button"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                        <input class="form-control quantity-selector quanitySniper" value="1" maxlength="2" placeholder="1" name="items[{{variation.id}}]" type="text">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-add btn-link bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
-                                    {# End product quantity #}
-                                    </div> {# End Row#}
-                                {% endif %}
-                            </form>
+                                </div>
+                                {# End product quantity #}
+                                </div> {# End Row#}
+                            {% endif %}
                         {% endif %}
                         {% if variation.sku is not empty %}
                             <div class="col-xs-12 col-md-4"> {# Begin Row#}
@@ -232,8 +232,9 @@
                 </div>   
                 <!--/.End cart-actions-->
             </div>
-                <div class="col-xs-12">
-                          <!-- Accordion -->
+            </form>
+            <div class="col-xs-12">
+                <!-- Accordion -->
                   <div class="panel-group" id="accordion">
                      <!-- Panel -->
                      <div class="panel panel-default">
@@ -257,14 +258,5 @@
                      <!-- /Panel -->
                   </div>
                   <!-- /End Accordion -->
-                  </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-8 ">
-            <div class="paging clearfix">
-                <a class="btn btn-outline pull-left" href="product2.html"><i class="glyphicon glyphicon-chevron-left"></i><span>Previous</span><span class="hidden-xs"> Product</span></a>
-                <a class="btn btn-outline pull-right" href="product1.html"><span>Next</span><span class="hidden-xs"> Product</span><i class="glyphicon glyphicon-chevron-right"></i></a>
             </div>
         </div>
-    </div>
