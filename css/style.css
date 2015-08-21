@@ -442,6 +442,22 @@ font-size: 13px;
 }
 .collection-dropdown {
     margin: 2px 0 0 15px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.btn-link-action {
+    text-transform: capitalize;
+    background-color: #fff;
+    border: none;
+}
+
+.btn-link-action:hover {
+    opacity: .8;
+}
+.collection-dropdown {
+    margin: 2px 0 0 15px;
+    text-align: center;
 }
 @media (max-width: 768px) {
     .collection-dropdown {
