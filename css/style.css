@@ -1389,7 +1389,7 @@ blockquote footer, blockquote small, blockquote .small {
   .productlist .col-sm-4 {
     position: relative;
     min-height: 1px;
-    padding: 0 15px 15px 15px;
+    padding: 0 0 15px 15px;
   }
   .productlist .row {
       margin-right: -15px;
