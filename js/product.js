@@ -359,6 +359,7 @@ function dropdown_trigger(event, dropdown_content_id){
     if(elem.hasClass("dropdown-open")){
         elem.removeClass("dropdown-open");
     }else{
+        $('.dropdown').removeClass("dropdown-open");
         elem.toggleClass("dropdown-open");
     }
 }
