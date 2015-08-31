@@ -10,7 +10,7 @@
                 {% for variation in product.variant %}
                    <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
                         <div class="product-price">
-                        {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                        {% set stock_description = variation.has_stock ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : 'Out of Stock' %}
                             <span class="product-price">{{ prod.price(variation.price) }}</span>
                             {# Begin regular price #}
                             {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
@@ -105,7 +105,7 @@
                     {# Begin Product Prices #}
                     {% if variation.price > 0 %}
                         <div class="product-price hidden-xs">
-                            {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                            {% set stock_description = variation.has_stock ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : 'Out of Stock' %}
                             <span class="product-price">{{ prod.price(variation.price) }}</span>
                             {# Begin regular price #}
                             {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
@@ -142,7 +142,7 @@
                                 </h5></span>
                             {% else %}
                                 <h5>
-                                    Out of stock
+                                    {{stock_description}}
                                 </h5>
                             {% endif %}
                             <h5>
@@ -166,8 +166,7 @@
                         {% if variation.price > 0 %}
                             <!--/.size-details-->
                             {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
-                                variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
-                                variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
+                                variation['inventory_policy'] is defined and variation['has_stock'] %}
                     
                                 {# Begin product Size-Quantity #}
                                 <div class="col-xs-2 col-md-6 no-padding"> {# Begin Row#}
