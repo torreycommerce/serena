@@ -17,7 +17,7 @@
   .h1, .h2, .h3, .bodycopy {color: #1d2831; font-family: 'Open Sans', sans-serif;}
   .h1 {font-size: 33px; line-height: 38px; font-weight: bold; text-transform: uppercase;}
   .h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; text-transform: uppercase;}
-  .h3 {padding: 15px 0 15px 0; font-size: 20px; line-height: 28px; font-weight: bold; text-transform: uppercase;}
+  .h3 {padding: 0 0 15px 0; font-size: 20px; line-height: 28px; font-weight: bold; text-transform: uppercase;}
   .bodycopy {font-size: 14px; line-height: 22px;}
   .light {color:#dcdcdc;}
   .light a {color:#dcdcdc;}
@@ -58,6 +58,7 @@
 </head>
 {% set order = api.get('/order/' ~ order_id) %}
 {% set items = api.get('/orderitem', {query:{'order_id':order_id}}) %}
+{% set fulfillment = api.get('/orderfulfillment/' ~ fulfillment_id) %}
 {% set product_ids = items|values_in('product_id') %}
 {% set products = api.get('/variant',{query:{id:{'$in':product_ids}}})|group_by('id') %}
 {% set shipping_method = api.get('/shippingmethod/' ~ order.shipping_method) %}
@@ -72,7 +73,7 @@
           <td>
     <![endif]-->     
     <table bgcolor="#f7f7f7" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-    {% include 'email/core/header.html.twig' %}
+      {% include 'email/core/header.html.twig' %}
       <tr>
         <td class="innerpadding borderbottom">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -83,8 +84,8 @@
             </tr>
             <tr>
               <td class="bodycopy">
-                Order ID: {{ order.order_number }}<br>
-                Your order has shipped
+                Order ID: {{ order.order_number }} <br/>
+                Your order has been shipped.
               </td>
             </tr>
           </table>
@@ -99,10 +100,11 @@
                   <tr>
                     <td class="h3 light">
                       Shipping Address
+                    </td>
                   </tr>
                   <tr>
                     <td class="bodycopy light">
-                        {{ order.shipping_first_name }} {{ order.shipping_last_name }} <br>
+                        { order.shipping_first_name }} {{ order.shipping_last_name }} <br>
                         {% if order.giftlist_present is empty %}<br>
                         {{ order.shipping_street_line1}} {{ order.shipping_street_line2}}<br>
                         {{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_zip }} <br>
@@ -110,16 +112,17 @@
                         {{ order.shipping_phone_number }}<br>
                         {% endif %}
                     </td>
+                  </tr>
                   <tr>
                     <td class="h3 light">
                       Delivery Method
+                    </td>
                   </tr>
                   <tr>
                     <td class="bodycopy light">
                         Using {{ shipping_method.name }} <br>
                         {% for item in items %} <br>
-                        {% if item.status == 'shipped' %}
-                    </td>                    
+                    </td>
                   </tr>
                 </table>
               </td>
@@ -146,12 +149,14 @@
                   <tr>
                     <td class="bodycopy light">
                         Status: {{ item.status }} <br>
-                        URL: {{site_url}}{{products[item.product_id].0.url}} <br>
+                        Item name: <a href="{{site_url}}{{products[item.product_id].0.url}}" target="_blank">{{ item.name }}</a> <br>
                         SKU: {{item.sku}} <br>
-                        Item name: {{ item.name }} <br>
-                        Quantity: {{ item.quantity }} <br>
-                        Tracking number: {{ item.tracking_number }} <br>
-                        {% endif %}
+                        {% for ffi in fulfillment.items %}
+                            {% if ffi.id == item.id %}
+                                Quantity: {{ ffi.quantity }} <br>
+                                Tracking number: {{ ffi.tracking }} <br>
+                            {% endif %}
+                        {% endfor %}
                         {% endfor %}
                     </td>
                   </tr>
@@ -172,7 +177,7 @@
           <![endif]-->
         </td>
       </tr>
-        {% include 'email/core/top-seller.html.twig' %}
+          {% include 'email/core/top-seller.html.twig' %}
           <tr>
             <td class="innerpadding bodycopy">
               Thank you from your friends at {{ app.params['site']['title'] }}.<br/>
