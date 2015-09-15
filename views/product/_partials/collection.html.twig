@@ -401,10 +401,12 @@
                                                                     (variation.inventory_shipping_estimate is not empty) %}
                                                                     <ul class="shipping" style="margin-bottom:0;">
                                                                         <li class="estimated-time">
-                                                                            {% if variation.inventory_quantity > variation.inventory_minimum_quantity %}
-                                                                            In Stock
+                                                                            {% if variation.has_stock %}
+                                                                                In Stock
                                                                             {% elseif variation.inventory_shipping_estimate is not empty %}
-                                                                            {{ variation.inventory_shipping_estimate }}
+                                                                                {{ variation.inventory_shipping_estimate }}
+                                                                            {% else %}
+                                                                                Out of Stock
                                                                             {% endif %}
                                                                         </li>
                                                                     </ul>
@@ -448,21 +450,20 @@
                                                                 <div class="actions">
                                                                     <div class="btn-toolbar">
                                                                         <div class="quantity-input-group quantity">
-                                                                            {% if product.variant[0]['inventory_quantity'] is defined and product.variant[0]['inventory_minimum_quantity'] is defined and
-                                                                            product.variant[0]['inventory_policy'] is defined and (product.variant[0]['inventory_policy'] == 'continue' or
-                                                                            product.variant[0]['inventory_quantity'] > product.variant[0]['inventory_minimum_quantity'] ) %}
+                                                                            {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
+                                                                            variation['inventory_policy'] is defined and variation.has_stock %}
                                                                             {# Begin product Quantity #}
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-btn">
-                                                                                    <button class="btn btn-remove bootstrap-touchspin-down" type="button">
-                                                                                        <i class="fa fa-minus"></i>
-                                                                                    </button>
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-btn">
+                                                                                        <button class="btn btn-remove bootstrap-touchspin-down" type="button">
+                                                                                            <i class="fa fa-minus"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <input class="form-control quantity-selector quanitySniper" value="0" maxlength="2" placeholder="0" name="items[{{variation.id}}]" type="text">
+                                                                                    <div class="input-group-btn">
+                                                                                        <button class="btn btn-add bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <input class="form-control quantity-selector quanitySniper" value="0" maxlength="2" placeholder="0" name="items[{{variation.id}}]" type="text">
-                                                                                <div class="input-group-btn">
-                                                                                    <button class="btn btn-add bootstrap-touchspin-up" type="button"><i class="fa fa-plus"></i></button>
-                                                                                </div>
-                                                                            </div>
                                                                             {% endif %}
                                                                         </div>
                                                                     </div>

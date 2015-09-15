@@ -10,7 +10,7 @@
                 {% for variation in product.variant %}
                    <div id="product-{{variation.id}}" {% if loop.index > 1 %}style="display:none"{% endif %}>
                         <div class="product-price">
-                        {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                        {% set stock_description = variation.has_stock ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : 'Out of Stock' %}
                             <span class="product-price">{{ prod.price(variation.price) }}</span>
                             {# Begin regular price #}
                             {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
@@ -105,7 +105,7 @@
                     {# Begin Product Prices #}
                     {% if variation.price > 0 %}
                         <div class="product-price hidden-xs">
-                            {% set stock_description = variation.inventory_quantity > 0 ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : '' %}
+                            {% set stock_description = variation.has_stock ? 'In Stock' :  variation.inventory_shipping_estimate is not empty ? variation.inventory_shipping_estimate : 'Out of Stock' %}
                             <span class="product-price">{{ prod.price(variation.price) }}</span>
                             {# Begin regular price #}
                             {% if variation.price != variation.compare_price and variation.compare_price is not empty %}
@@ -142,7 +142,7 @@
                                 </h5></span>
                             {% else %}
                                 <h5>
-                                    Out of stock
+                                    {{stock_description}}
                                 </h5>
                             {% endif %}
                             <h5>
@@ -166,8 +166,7 @@
                         {% if variation.price > 0 %}
                             <!--/.size-details-->
                             {% if variation['inventory_quantity'] is defined and variation['inventory_minimum_quantity'] is defined and
-                                variation['inventory_policy'] is defined and (variation['inventory_policy'] == 'continue' or
-                                variation['inventory_quantity'] > variation['inventory_minimum_quantity'] ) %}
+                                variation['inventory_policy'] is defined and variation['has_stock'] %}
                     
                                 {# Begin product Size-Quantity #}
                                 <div class="col-xs-2 col-md-6 no-padding"> {# Begin Row#}
@@ -218,8 +217,26 @@
             {% endif %}
             <!-- For Variant options dropdowns -->
             <div id="variation-selector-{{product.id}}"></div>
-
-
+                {# Begin social sharing #}
+                {% if app.params.social_settings is defined and app.params.social_settings is not empty and (
+                    app.params.social_settings["facebook"]["active_like"] == true or
+                    app.params.social_settings["facebook"]["active_share"] == true or
+                    app.params.social_settings["facebook"]["active_follow_page_button"] == true or
+                    app.params.social_settings["twitter"]["active_tweet"] == true or
+                    app.params.social_settings["twitter"]["active_follow_page_button"] == true or
+                    app.params.social_settings["pinterest"]["active_pin_it"] == true or
+                    app.params.social_settings["pinterest"]["active_follow_page_button"] == true or
+                    app.params.social_settings["google"]["active_plus_one"] == true or
+                    app.params.social_settings["google"]["active_follow_page_button"] == true
+                    ) %}
+                        <div class="row">
+                            <div class="col-md-12 socialIc">
+                                <span class="socialIcon">Share this item:</span>
+                                {{ social.sharing_buttons(app.params.social_settings, product) }}
+                            </div>
+                        </div>
+                {% endif %}
+                    {# End social sharing #}
                 <!-- / Begin Cart-actions -->
                 <div class="addto row" style="margin-top:10px;">
                     {% include "/product/_partials/list/actions-single.html.twig" %}
@@ -233,6 +250,7 @@
                 <!--/.End cart-actions-->
             </div>
             </form>
+
             <div class="col-xs-12">
                 <!-- Accordion -->
                   <div class="panel-group" id="accordion">

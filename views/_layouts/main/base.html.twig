@@ -112,7 +112,7 @@
                                     <a href="{{app.url}}/">
                                     <img src="{{ logo }}" class="brand-logo"></a>
                                 {% else %}
-                                    <div id="logo-txt"><a class="nav-brand" href="{{app.url}}/">{{ app.params.site.title|striptags|slice(0, 32) }}</a></div>
+                                    <div id="logo-txt"><a class="nav-brand" href="{{app.url}}/">{{ app.params.site.title|striptags|slice(0, 50) }}</a></div>
                                 {% endif %}
                                 {% set cart = api.get('/sessioncart') %}
                                 <a class="nav-icon pull-right visible-xs menu-link" href="#nav-mobile-main">

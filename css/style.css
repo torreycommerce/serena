@@ -833,6 +833,10 @@ font-weight: 400;
 #social {
   padding: 40px 0 20px;
 }
+.socialIc {
+  width: 100%;
+  display: block;
+}
 .checkbox, .radio {
   margin: 24px 0px;
   /* padding-left: 32px; */
@@ -872,8 +876,6 @@ form p {
   font-weight: 600;
   font-size: 21px;
 }
-
-
 .form-control-inline {
   min-width: 0;
   width: auto!important; 
@@ -886,10 +888,6 @@ form p {
 address {
   font-size: 14px;
 }
-
-
-
-
 /* ------------------------------ skin checkbox -------------------------- */
 input[type="radio"],
 input[type="checkbox"] {
@@ -1210,10 +1208,10 @@ a.close-menu:hover {
   border: 2px solid #000;
   display:block;
   color:#000;
-  font-size: 16px;
+  font-size: 14px;
   width: 41px;
   height: 41px;
-  line-height: 40px;
+  line-height: 46px;
   text-align:center;
   border-radius:50%;
   -ms-transition: all 0.3s ease-out;
@@ -1409,8 +1407,9 @@ blockquote footer, blockquote small, blockquote .small {
   
   a.nav-brand {
     float: left;
-    width: auto;
+    width: 55%;
     font-size: 28px;
+    line-height: 30px;
     letter-spacing: -1px;
     border: 0;
 }
@@ -1801,6 +1800,7 @@ legend{
     background: white;
     border: 1px solid #c9c9c9;
     display: block;
+    min-width: 270px;
     width: 100%;
     text-align: center;
     vertical-align: middle;

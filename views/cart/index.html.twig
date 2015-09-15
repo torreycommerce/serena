@@ -17,7 +17,7 @@
 {% if app.request.post.cart.coupon_code is not empty %}
 {% set result = api.post('/sessioncartcoupon', {code:app.request.post.cart.coupon_code}) %}
 {% endif %}
-
+{% set config = api.get('/config') %}
 <div id="customer-cart" class="container-fluid title"> <!-- Main -->   
     <!-- Title -->
     <div class="row">
@@ -117,12 +117,16 @@
                     <h6><a href="{{ app.url ~ product.url }}">{{ product.title }}</a></h6>
                 </div>
                 <div class="availability">
-                    {% if product.inventory_quantity > product.inventory_minimum_quantity %}
+                    {% if product.has_stock %}
                         In Stock
                     {% elseif variation.inventory_shipping_estimate is not empty %}
-                    <span class="text-danger">
-                        {{ variation.inventory_shipping_estimate }}
-                    </span>
+                        <span class="text-danger">
+                            {{ variation.inventory_shipping_estimate }}
+                        </span>
+                    {% else %}
+                        <span class="text-danger">
+                            Out of Stock
+                        </span>
                     {% endif %}
                 </div>
                 <div class="remove">
@@ -261,17 +265,21 @@
                             <strong>Subtotal:</strong>&nbsp;<span class="amount" id="total-price"><span class="dollars"><span class="dollar-sign float-left">$</span>{{ cart.subtotal|number_format(2)|split('.')|first }}.{{ cart.subtotal|number_format(2)|split('.')|last }}</span></span>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div id="proceed-to-checkout">
-                            <a class="btn btn-primary btn-lg btn-block" style="margin:20px 0" href="{{ app.url }}/checkout">Proceed To Checkout
-                            <i class="fa fa-arrow-right"></i></a>
+                    {% if config.components.payflowpro.enable == true %}
+                        <div class="col-md-12">
+                            <div id="proceed-to-checkout">
+                                <a class="btn btn-primary btn-lg btn-block" style="margin:20px 0" href="{{ app.url }}/checkout">Proceed To Checkout
+                                <i class="fa fa-arrow-right"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="paypal">
-                            <a href="{{ app.url }}/checkout/paypal"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"></a>
+                    {% endif %}
+                    {% if config.components.nvp.enable == true %}
+                        <div class="col-md-12">
+                            <div id="paypal">
+                                <a href="{{ app.url }}/checkout/paypal"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"></a>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>  <!--/ End Subtotal Part Col-Xs-12 col-sm-12 -->
             </div>
         </div> <!--/ End Subtotal Part Col-Xs-12 col-sm-12 -->
