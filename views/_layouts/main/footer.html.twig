@@ -65,7 +65,3 @@
       {% import "/_macros/chat.html.twig" as chat %}
         {{ chat.displayLiveChat( app.params['live_chat']['chat_licence']) }}
       {% endif %}
-
-      {% if 'place' not in app.request.url %}
-      {% include '/_partials/analytics.html.twig' %} {# There should probably be a better way to do this #}
-      {% endif %}

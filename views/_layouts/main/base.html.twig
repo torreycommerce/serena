@@ -28,7 +28,9 @@
 {{ app.asset.js(app.url_asset ~ '/js/normalizer.js') }}
 {{ app.asset.js(app.url_asset ~ '/js/jquery.maskedinput.js') }}
 {{ app.asset.js(app.url_asset ~ '/js/typeahead.js') }}
-
+{% if app.params.seo.google_analytics is not empty or app.params.seo.google_tag_manager is not empty %}
+{{ app.asset.js(app.url_asset ~ '/js/acendaAnalytics.js') }}
+{% endif %}
 {# Theme Scripts #}
 
 {{ app.asset.js(app.url_asset ~ '/js/placeholders.min.js') }}
@@ -81,9 +83,24 @@
     var acendaBaseUrl = '{{app.url}}'
     var acendaBaseThemeUrl = '{{app.url_asset}}'
     </script>
+    <script>
+        {% block acenda %}
+            {% include '/_partials/acenda.html.twig' %}
+        {% endblock %}
+    </script>
     {% endblock %}
 </head>
 <body id="home">
+    {% if app.params.seo.google_tag_manager is not empty and app.params.seo.google_analytics is empty %}
+        <!-- Google Tag Manager DataLayer -->
+        <script>
+            var dataLayer = [];
+            {% block dataLayer %}
+                {% include '/_partials/tag-manager.html.twig' %} {# Google Tag Manager Snippet #}
+            {% endblock %}
+        </script>
+        <!-- Google Tag Manager DataLayer End -->
+    {% endif %}
     <div id="wrapper" class="page-wrapper shadow" >
         {% block body %}
         <!--[if lte IE 8]>
