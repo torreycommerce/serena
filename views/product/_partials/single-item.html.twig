@@ -217,8 +217,26 @@
             {% endif %}
             <!-- For Variant options dropdowns -->
             <div id="variation-selector-{{product.id}}"></div>
-
-
+                {# Begin social sharing #}
+                {% if app.params.social_settings is defined and app.params.social_settings is not empty and (
+                    app.params.social_settings["facebook"]["active_like"] == true or
+                    app.params.social_settings["facebook"]["active_share"] == true or
+                    app.params.social_settings["facebook"]["active_follow_page_button"] == true or
+                    app.params.social_settings["twitter"]["active_tweet"] == true or
+                    app.params.social_settings["twitter"]["active_follow_page_button"] == true or
+                    app.params.social_settings["pinterest"]["active_pin_it"] == true or
+                    app.params.social_settings["pinterest"]["active_follow_page_button"] == true or
+                    app.params.social_settings["google"]["active_plus_one"] == true or
+                    app.params.social_settings["google"]["active_follow_page_button"] == true
+                    ) %}
+                        <div class="row">
+                            <div class="col-md-12 socialIc">
+                                <span class="socialIcon">Share this item:</span>
+                                {{ social.sharing_buttons(app.params.social_settings, product) }}
+                            </div>
+                        </div>
+                {% endif %}
+                    {# End social sharing #}
                 <!-- / Begin Cart-actions -->
                 <div class="addto row" style="margin-top:10px;">
                     {% include "/product/_partials/list/actions-single.html.twig" %}
@@ -232,6 +250,7 @@
                 <!--/.End cart-actions-->
             </div>
             </form>
+
             <div class="col-xs-12">
                 <!-- Accordion -->
                   <div class="panel-group" id="accordion">

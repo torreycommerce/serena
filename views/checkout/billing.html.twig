@@ -7,6 +7,10 @@
 {% endblock %}
 {% set step = 'billing' %}
 {% set cart = api.get('/sessioncart') %}
+{% if cart.items is not empty %} {# Set cart products for acenda object #}
+    {% set product_ids = cart.items|values_in('product_id') %}
+    {% set products = api.get('/variant',{query:{id:{'$in':product_ids}}})|group_by('id') %}
+{% endif %}
 {% block content %}
 {% if app.request.get.clear == "same" %}
     {% do app.user.setState('shipping_same_as_billing', null) %}
@@ -38,11 +42,11 @@
             </div>
         </div>
     </div> <!--/ End Credit Card Information -->
-
+    {{ forms.begin('checkout', app.url ~ '/checkout/place', 'post', { class:'form-horizontal' }) }}
     <!-- /Credit Card Info And Order Summary -->
     <div class="row">
         <div class="col-md-12"> <!-- /Col-Md-12 -->
-        {{ forms.begin('checkout', app.url ~ '/checkout/place', 'post', { class:'form-horizontal' }) }}
+        
             {% if app.user.getState('test_order') %}
                 <div class="row">
                     <div class="col-sm-12">
@@ -243,7 +247,6 @@
                         {% include "/checkout/_partials/summary.html.twig" %}
                     </div>
                 </div> <!-- / End Order Summary -->
-                {{ forms.end() }}
             </div> <!-- /End Row -->
         </div> <!-- /End Col-Md-12 -->
     </div>
@@ -263,9 +266,19 @@
                     </div>
         </div> <!--/ End Footer Button Part Col-md-12-->
     </div> <!--/ End Footer Button Part Row--> 
+    {{ forms.end() }}
 </div> <!-- /Main -->  
 {% endblock %}
 {% block js %}
 {{ app.asset.js(app.url_asset ~ '/js/checkout.js') }}
 {{ app.asset.js(app.url_asset ~ '/js/region.js') }}
+{% endblock %}
+
+{% block acenda %}
+    {{ parent() }}
+    {% include "/checkout/_partials/acenda.html.twig" %}
+{% endblock %}
+{% block dataLayer %}
+    {% include "/checkout/_partials/dataLayer.html.twig" %}
+    {{ parent() }}
 {% endblock %}

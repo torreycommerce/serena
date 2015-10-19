@@ -47,8 +47,13 @@
 
           <div class="pull-right copyright">
               <ul class="social-links">
-                <li><a href="https://twitter.com/angelo_studio"><i class="ti-twitter-alt"></i></a></li>
-                <li><a href="http://dribbble.com/angelo_studio"><i class="ti-facebook"></i></a></li>
+                {# if social settings is not set in the config file, just do nothing #}
+                {% if app.params.social_settings is defined and app.params.social_settings is not empty %}
+                <li>
+                  {{ social.social_parseConfig(app.params.social_settings) }}
+                </li>
+                {% endif %}
+                {# End Social Network Icons #}
               </ul>
           </div>
         </div>
@@ -59,8 +64,4 @@
       and app.params['live_chat']['chat_licence'] is defined and app.params['live_chat']['chat_licence'] is not empty %}
       {% import "/_macros/chat.html.twig" as chat %}
         {{ chat.displayLiveChat( app.params['live_chat']['chat_licence']) }}
-      {% endif %}
-
-      {% if 'place' not in app.request.url %}
-      {% include '/_partials/analytics.html.twig' %} {# There should probably be a better way to do this #}
       {% endif %}

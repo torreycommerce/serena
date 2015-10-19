@@ -28,9 +28,30 @@ function VariantsManager (variants, variant_options, isCollection) {
     }
 
     this.getVariationSelector = function(selectName, optionValue){
+        selectName = selectName.replace(/ /g, "-");
+        optionValue = optionValue.replace(/ /g, "-");
         return "[id=variation-selector-"+ this.jqSelector(self.product_id+"-"+selectName+"-"+optionValue) +"]";
     }
+    this.getVariationValueId = function(selectName, optionValue){
+        selectName = selectName.replace(/ /g, "-");
+        optionValue = optionValue.replace(/ /g, "-");
+        return "variation-selector-"+this.product_id+"-"+selectName+"-"+optionValue;
+    }
+    this.getVariationOptionId = function(selectName){
+        selectName = selectName.replace(/ /g, "-");
+        return "variation-selector-"+this.product_id+"-"+selectName;
+    }
+    this.getVariationSelectedId = function(selectName){
+        selectName = selectName.replace(/ /g, "-");
+        return "selected-"+selectName+"-"+this.product_id;
+    }
+    this.getVariationContentId = function(selectName){
+        selectName = selectName.replace(/ /g, "-");
+        return "variation-selector-"+this.product_id+"-"+selectName+"-content";
+    }
+
     this.getSelectedValue = function(selectName){
+        selectName = selectName.replace(/ /g, "-");
         return "[id=selected-"+ this.jqSelector(selectName+"-"+self.product_id) +"]";
     }
     this.getProductVariation = function(variant_id){
@@ -222,23 +243,23 @@ function VariantsManager (variants, variant_options, isCollection) {
             //Color styling
             if( selectName.toLowerCase() == "color"){
                 if(self.isCollection){
-                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"}); 
+                    var div = $('<div>', {id: self.getVariationOptionId(selectName), name: selectName, class: "dropdown"}); 
                 }else{
-                    var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});
+                    var div = $('<div>', {id: self.getVariationOptionId(selectName), name: selectName, class: "dropdown"});
                 }
      
                 var ul = $('<ul>', {class: ""});  
                 var button = $('<div>', {    class: "dropdown-trigger", 
-                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"')"
+                                                onclick: "dropdown_trigger(event, "+"'"+self.getVariationOptionId(selectName)+"')"
                                             }).append(
                                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ") 
                             ); 
 
             }else{//size (default) styling
-                var div = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName, name: selectName, class: "dropdown"});           
+                var div = $('<div>', {id: self.getVariationOptionId(selectName), name: selectName, class: "dropdown"});           
                 var ul = $('<ul>', {class: ""});  
                 var button = $('<div>', {    class: "dropdown-trigger", 
-                                                onclick: "dropdown_trigger(event, "+"'variation-selector-"+self.product_id+"-"+selectName+"')"
+                                                onclick: "dropdown_trigger(event, "+"'"+self.getVariationOptionId(selectName)+"')"
                                             }).append(
                                 $('<strong>', {}).text(selectName.slice(0,1).toUpperCase()+selectName.slice(1,selectName.length) + ":  ")
                             );
@@ -246,13 +267,13 @@ function VariantsManager (variants, variant_options, isCollection) {
 
             $.each(optionArray, function(index, optionValue){
                 ul.append( 
-                    $('<li>', { id: "variation-selector-"+self.product_id+"-"+selectName+"-"+optionValue, 
+                    $('<li>', { id: self.getVariationValueId(selectName, optionValue), 
                                 class: "",
                                 "data-tooltip": "",
                                 "data-toggle": "tooltip",
                                 "data-placement":"top",
                                 "title": self.outOfStock,
-                                onclick: "dropdown_trigger("+"'variation-selector-"+self.product_id+"-"+selectName+"')"
+                                onclick: "dropdown_trigger("+"'"+self.getVariationOptionId(selectName)+"')"
                     })
                     // .append(
                     //         self.getATag(selectName, optionValue)
@@ -264,10 +285,10 @@ function VariantsManager (variants, variant_options, isCollection) {
                 );
             });
 
-            var content = $('<div>', {id: "variation-selector-"+self.product_id+"-"+selectName+"-content", name: selectName, class: "dropdown-content"});
+            var content = $('<div>', {id: self.getVariationContentId(selectName), name: selectName, class: "dropdown-content"});
             content.append(ul);
 
-            var span_selected = $('<span>', {class: "", id: "selected-"+selectName+"-"+self.product_id}).text("");
+            var span_selected = $('<span>', {class: "", id: self.getVariationSelectedId(selectName)}).text("");
             button.append(span_selected);
             var i = $('<i>', {class: "fa fa-caret-up pull-right"});
             button.append(i);
@@ -353,7 +374,15 @@ $(document).click(function() {
 });
 
 function dropdown_trigger(event, dropdown_content_id){
-    event.stopPropagation();
+    if (!event)
+        event = window.event;
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    }
+    else {
+      event.cancelBubble = true;
+    }
+
     var selector = "#"+dropdown_content_id;
     var elem = $(selector);
     if(elem.hasClass("dropdown-open")){
