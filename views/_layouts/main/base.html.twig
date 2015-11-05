@@ -71,6 +71,7 @@
     
     
     <link rel="sitemap" href="{{app.url}}/api/sitemap" />
+    <link rel="canonical" href="{{ app.request.base ~ '/' ~ app.request.url }}"/>
 
     {% block css %}{% endblock %}
     <title>{% block title %}{{ app.params.site.title }}{% endblock %}</title>
