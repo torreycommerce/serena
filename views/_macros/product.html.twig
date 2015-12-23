@@ -2,14 +2,12 @@
     {% spaceless %}
     {% set product =  product|merge({'variant':product.product|values_in('variant')}) %}
     {% set product =  product|merge({'attributes':product.variant|values_in(['price','compare_price','save_price','save_percent','color'])}) %}
-
     {% import _self as this %}
     {% import "/_macros/base.html.twig" as base %}
     <div class="product">
         {% if 'image' in options %}
             {# Grab image based on color facets #}
             {% set img_url = product.thumbnail %}
-
             {% if product.attributes.color|length > 1 %}
                 {% set current_colors = app.request.get.f.color|keys %}
                 {% for variant in product.variant 
@@ -17,12 +15,10 @@
                         {% set img_url = variant.thumbnail %}
                 {% endfor %}
             {% endif %}
-
-	    {% set secure =  app.url_asset | slice(0,5)  %}
-	    {% if secure == 'https' %}
-		{% set img_url = img_url | replace({'http:':'https:'}) %}
+        {% set secure =  app.url_asset | slice(0,5)  %}
+        {% if secure == 'https' %}
+        {% set img_url = img_url | replace({'http:':'https:'}) %}
             {% endif %}
-
             {# Begin product image #}               
             <div class="image">
                 <a class="thumbnail" href="{{app.url}}/product/{{product.slug}}"> 
@@ -30,7 +26,6 @@
                 </a>
             </div>                            
             {# End product image #}
-
             {# There is no point in having a carousel without an image, so it is moved inside here #}
             {% if 'carousel' in options %}
                 {# Begin image carousel insert #}
@@ -71,7 +66,6 @@
     </div>
     {% endspaceless %}
 {% endmacro %}
-
 {% macro carousel(product) %}
 {% spaceless %}
 {# Begin image carousel #}
@@ -82,16 +76,20 @@
             <div id="color-image-carousel-{{product.id}}" class="col-xs-6 col-sm-10 carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="item active">
+                        {% set colors = [] %}
                         {% for item,child in product.variant if child.status == 'active' and child.images is not empty %}
-                        <div class="thumbnail col-xs-2">
-                            <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="{{ child.thumbnail }}" class="img-responsive" data-image-swap="product-image-{{product.id}}" data-image-swap-src="{{ child.thumbnail }}">
-                        </div>
-                        {% set carouselblock = carouselblock + 1 %}
-                        {% if carouselblock is divisibleby(6) and product.variant[(item + 1)] is defined %}
-                            {% set carouselHasNext = true %}
-                            </div>
-                            <div class="item">
-                        {% endif %}
+                            {% if child.color not in colors %}
+                                {% set colors = colors|merge([child.color]) %}
+                                <div class="thumbnail col-xs-2">
+                                    <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="{{ child.thumbnail }}" class="img-responsive" data-image-swap="product-image-{{product.id}}" data-image-swap-src="{{ child.thumbnail }}">
+                                </div>
+                                {% set carouselblock = carouselblock + 1 %}
+                                {% if carouselblock is divisibleby(6) and product.variant[(item + 1)] is defined %}
+                                    {% set carouselHasNext = true %}
+                                    </div>
+                                    <div class="item">
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -111,7 +109,6 @@
 {# End image carousel #}
 {% endspaceless %}
 {% endmacro %}
-
 {% macro price(prices) %}
 {% spaceless %}
     {% if prices is not iterable %}
@@ -131,7 +128,6 @@
     {% endif %}
 {% endspaceless %}
 {% endmacro %}
-
 {% macro billmelater(prices, text='per month*') %}
 {% spaceless %}
     {% if prices is not iterable %}
@@ -149,7 +145,6 @@
     {% endif %}
 {% endspaceless %}
 {% endmacro %}
-
 {% macro saveprice(saveprices) %}
 {% spaceless %}
     {% if saveprices is not iterable %}
@@ -165,26 +160,17 @@
     {% endif %}
 {% endspaceless %}
 {% endmacro %}
-
-{% macro savepercent(percents, showParenthesis='true') %}
+{% macro savepercent(percents) %}
 {% spaceless %}
     {% if percents is not iterable %}
-        {% if showParenthesis == 'true'%}
-            ({{ percents }}%)
-        {% else %}
-            {{ percents }}%
-        {% endif %}
+        ({{ percents }}%)
     {% else %}
         {% set max = percents[0] %}
         {% for percent in percents %}
             {% set max = max < percent ? percent : max %}
         {% endfor %}
         {% if max > 0 %}
-            {% if showParenthesis == 'true'%}
-                ({{ max }}%)
-            {% else %}
-                {{ max }}%
-            {% endif %}
+            ({{ max }}%)
         {% endif %}
     {% endif %}
 {% endspaceless %}
