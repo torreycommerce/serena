@@ -18,23 +18,23 @@
             "content": {
                 "logo-color": {
                     "type": "color",
-                    "value": "FFA07A"
+                    "value": "000"
                 },
                 "text-color": {
                     "type": "color",
-                    "value": "00BFFF"
+                    "value": "000"
                 },
                 "title-color": {
                     "type": "color",
-                    "value": "800000"
+                    "value": "000"
                 },
                 "price-color": {
                     "type": "color",
-                    "value": "9400D3"
+                    "value": "000"
                 },
                 "link-color": {
                     "type": "color",
-                    "value": "FFD700"
+                    "value": "666b76"
                 },
                 "link-hover-color": {
                     "type": "color",
@@ -56,7 +56,7 @@
             "buttons": {
                 "primary-btn-background": {
                     "type": "color",
-                    "value": "00BFFF"
+                    "value": "000"
                 },
                 "primary-btn-border": {
                     "type": "color",
@@ -68,15 +68,15 @@
                 },
                 "primary-btn-hover-background": {
                     "type": "color",
-                    "value": "9400D3"
+                    "value": "67C4B0"
                 },
                 "primary-btn-hover-border": {
                     "type": "color",
-                    "value": "9400D3"
+                    "value": "67C4B0"
                 },
                 "secondary-btn-background": {
                     "type": "color",
-                    "value": "FFD700"
+                    "value": "fff"
                 },
                 "secondary-btn-border": {
                     "type": "color",
@@ -99,15 +99,15 @@
             "footer": {
                 "footer-text-color": {
                     "type": "color",
-                    "value": "FFD700"
+                    "value": "67C4B0"
                 },
                 "footer-link-text": {
                     "type": "color",
-                    "value": "FFD700"
+                    "value": "67C4B0"
                 },
                 "footer-copy": {
                     "type": "color",
-                    "value": "FFD700"
+                    "value": "000"
                 }
             }
         },
