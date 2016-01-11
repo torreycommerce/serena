@@ -1,0 +1,35 @@
+{% set image_url = app.image.getImageUrl('product','serena', product.images[0].id) %} 
+<a href="{{ app.url }}/product/{{ product.slug }}">
+    <img onerror="this.src='{{ app.url_asset }}/images/product/image-800x530.jpg'" src="{{ image_url }}" class="img-responsive" alt="item">
+    <div class="productlist-label">
+        {% for tag in product.tags %}
+            {% if tag == 'new' %}
+                <span class="label-new">{{ tag|capitalize }}</span> <!-- class new-label to create ... -->
+            {% elseif tag == 'sale' %}
+                <span class="label-sale">{{ tag|capitalize }}</span> 
+            {% elseif tag == 'popular' %}
+                <span class="label-hot">{{ tag|capitalize }}</span> 
+            {% elseif tag == 'sold-out' %}
+                <span class="sold-out">{{ tag|capitalize }}</span> 
+            {% else %}
+                <span class="label-feat">{{ tag|capitalize }}</span> 
+            {% endif %}
+        {% endfor %}
+    </div>
+    <span class="productlist-price-container">
+        <span class="product-price">
+            <span class="price">
+                {% if product.attributes.price %}
+                    {{ prod.price(product.attributes.price) }}
+                {% endif %}
+            </span>
+            {% if product.attributes.compare_price[0] is not empty and product.attributes.compare_price != product.attributes.price %}
+                <span class="original-price">
+                    <span class="price">
+                        {{ prod.price(product.attributes.compare_price) }}
+                    </span>
+                </span>
+            {% endif %}
+        </span>
+    </span>
+</a>
