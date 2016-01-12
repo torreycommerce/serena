@@ -1,4 +1,4 @@
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 {% import "/_macros/form-elements-bootstrap.html.twig" as forms %}
 {% import "/account/_macros/base.html.twig" as account %}
 
@@ -11,7 +11,7 @@
 {# Set the html head title #}
 {% block title %}Account - {{page_name|title}}{% endblock %} 
 
-{# Load in the breadcrumbs positioned in /_layouts/main/base.html.twig #}
+{# Load in the breadcrumbs positioned in /_layouts/base.html.twig #}
 {% block breadcrumb %}
 {#
 Passed into the macro is a array of key:value pairs as (title):(relative url)

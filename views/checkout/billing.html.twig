@@ -1,4 +1,4 @@
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 {% import "/_macros/form-elements-bootstrap.html.twig" as forms %}
 {% import "/_macros/form-extras.html.twig" as extras %}
 {% import "/_macros/normalizer.html.twig" as normalizer %}
@@ -92,10 +92,10 @@
                     <fieldset> <!-- /Fieldset Credit Card Info -->
                         <div class="form-group">
                             <div class="col-sm-9 col-sm-offset-3">
-                                <img src="{{app.url_asset}}/images/creditcards/visa.png" class="cc-visa">
-                                <img src="{{app.url_asset}}/images/creditcards/mastercard.png" class="cc-mastercard">
-                                <img src="{{app.url_asset}}/images/creditcards/amex.png" class="cc-amex">
-                                <img src="{{app.url_asset}}/images/creditcards/discover.png" class="cc-discover">
+                                <img src="{{app.url_asset}}/assets/images/creditcards/visa.png" class="cc-visa">
+                                <img src="{{app.url_asset}}/assets/images/creditcards/mastercard.png" class="cc-mastercard">
+                                <img src="{{app.url_asset}}/assets/images/creditcards/amex.png" class="cc-amex">
+                                <img src="{{app.url_asset}}/assets/images/creditcards/discover.png" class="cc-discover">
                             </div>
                         </div>
                         <div class="form-group">
@@ -270,8 +270,8 @@
 </div> <!-- /Main -->  
 {% endblock %}
 {% block js %}
-{{ app.asset.js(app.url_asset ~ '/js/checkout.js') }}
-{{ app.asset.js(app.url_asset ~ '/js/region.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/checkout.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/region.js') }}
 {% endblock %}
 
 {% block acenda %}

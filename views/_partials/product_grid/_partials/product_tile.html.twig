@@ -1,6 +1,6 @@
 {% set image_url = app.image.getImageUrl('product','serena', product.images[0].id) %} 
 <a href="{{ app.url }}/product/{{ product.slug }}">
-    <img onerror="this.src='{{ app.url_asset }}/images/product/image-800x530.jpg'" src="{{ image_url }}" class="img-responsive" alt="item">
+    <img onerror="this.src='{{ app.url_asset }}/assets/images/product/image-800x530.jpg'" src="{{ image_url }}" class="img-responsive" alt="item">
     <div class="productlist-label">
         {% for tag in product.tags %}
             {% if tag == 'new' %}

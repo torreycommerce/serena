@@ -1,4 +1,4 @@
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 {% import "/_macros/form-elements-bootstrap.html.twig" as forms %}
 
 {% for item, quantity in app.request.post.cart.quantity %}
@@ -117,7 +117,7 @@
                 {% else %}
                     {% set prod_image = product.thumbnail %}
                 {% endif %}
-                <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="{{ prod_image }}">
+                <img onerror="this.src='{{ app.url_asset }}/assets/images/product/image-250x250.jpg'" src="{{ prod_image }}">
             </div>
         </div> <!--/ End Product Thumbnail-->
 
@@ -312,7 +312,7 @@
 </div> <!-- / End Main -->   
 {% endblock %}
 {% block js %}
-{{ app.asset.js(app.url_asset ~ '/js/estimator.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/estimator.js') }}
 {% endblock %}
 
 {% block acenda %}

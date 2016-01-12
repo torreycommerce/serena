@@ -87,7 +87,7 @@
     </script>
     <script>
         {% block acenda %}
-            {% include '/_partials/acenda.html.twig' %}
+            {% include '/_partials/analytics/acenda.html.twig' %}
         {% endblock %}
     </script>
     {% endblock %}
@@ -98,7 +98,7 @@
         <script>
             var dataLayer = [];
             {% block dataLayer %}
-                {% include '/_partials/tag-manager.html.twig' %} {# Google Tag Manager Snippet #}
+                {% include '/_partials/analytics/tag-manager.html.twig' %} {# Google Tag Manager Snippet #}
             {% endblock %}
         </script>
         <!-- Google Tag Manager DataLayer End -->
@@ -176,7 +176,7 @@
             <div class="container-fluid">
                 <div class="row" style="padding-top:10px;">
                             <div class="col-sm-4" style="padding-top:4px;">
-                                <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" src="{{ back_to }}/images/logo-acenda-small.png">
+                                <img onerror="this.src='{{ app.url_asset }}/assets/images/product/image-250x250.jpg'" src="{{ back_to }}/images/logo-acenda-small.png">
                             </div>
                             <div class="col-sm-4" >
                                 {% if app.params.password is not empty %}

@@ -1,16 +1,18 @@
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 
-{% block title %}Search{% endblock %}
+{% set title = 'Search' %}
+
+{% block title %}{{title}}{% endblock %}
 
 {% block breadcrumb %}
-    {{ base.breadcrumbs({'Search':'/search'}) }}
+    {{ base.breadcrumbs({(title):''}) }}
 {% endblock %}
 
 {% if app.request.get.s|length < 2 %}
 	{% do app.redirect('/',[],'404') %}
 {% endif %}
 {% block content %}
-    {% set default_query = {"status":"active","category_id":{"$exists":true}} %}
+    {% set default_query = {"status":"active"} %}
     {% set default_attributes = "color,category_id,gender,size,price,review_score" %}
-    {% include "/category/_partials/base.html.twig"%}
+    {%include "/category/_partials/base.html.twig"%}
 {% endblock %}

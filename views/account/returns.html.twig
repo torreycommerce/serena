@@ -1,4 +1,4 @@
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 {% import "/_macros/base.html.twig" as base %}
 {% import "/_macros/form-elements-bootstrap.html.twig" as forms %}
 {% import "/account/_macros/base.html.twig" as account %}
@@ -13,7 +13,7 @@
 {# Set the html head title #}
 {% block title %}Account - {{page_name|title}}{% endblock %}
 
-{# Load in the breadcrumbs positioned in /_layouts/main/base.html.twig #}
+{# Load in the breadcrumbs positioned in /_layouts/base.html.twig #}
 {% block breadcrumb %}
     {#
         Passed into the macro is a array of key:value pairs as (title):(relative url)
@@ -137,7 +137,7 @@
                     {% set product = api.get('/variant/' ~ item.product_id) %}
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-3">
-                            <img onerror="this.src='{{ app.url_asset }}/images/product/image-250x250.jpg'" class="img-thumbnail" src='{{ product.thumbnail }}'>
+                            <img onerror="this.src='{{ app.url_asset }}/assets/images/product/image-250x250.jpg'" class="img-thumbnail" src='{{ product.thumbnail }}'>
                         </div>
                         <div class="col-xs-8 col-sm-8 col-md-9">
                             <a href="{{ app.url ~ product.url }}">{{ item.name }}</a>
@@ -172,5 +172,5 @@
 {# End returns #}
 {% endblock %}
 {% block js %}
-{{ app.asset.js(app.url_asset ~ '/js/returns.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/returns.js') }}
 {% endblock %}

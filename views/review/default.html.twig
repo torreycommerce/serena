@@ -1,6 +1,6 @@
 
 {% import "/_macros/form-elements-bootstrap.html.twig" as form %}
-{% extends "/_layouts/theme.html.twig" %}
+{% extends "/_layouts/base.html.twig" %}
 {% block breadcrumb %}
 {{ base.breadcrumbs({'Review':''}) }}
 {% endblock %}
@@ -165,5 +165,5 @@
 </div>
 {% endblock %}
 {% block js %}
-{{ app.asset.js(app.url_asset ~ '/js/region.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/region.js') }}
 {% endblock %}

@@ -146,8 +146,8 @@
         </div>
 
     {{ form.end() }}
-{% block js %}
-{{ app.asset.js(app.url_asset ~ '/js/account.js') }}
-{{ app.asset.js(app.url_asset ~ '/js/region.js') }}
+    {% block js %}
+{{ app.asset.js(app.url_asset ~ '/assets/js/account.js') }}
+{{ app.asset.js(app.url_asset ~ '/assets/js/region.js') }}
 {% endblock %}
 <div class="gap"></div>
